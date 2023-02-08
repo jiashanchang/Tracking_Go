@@ -1,0 +1,68 @@
+.createRecord {
+    padding: 20px;
+    align-items: center;
+    text-align: center;
+}
+
+.icon-record {
+    width: 100px;
+    padding: 10px;
+}
+
+.record-text {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.record {
+    border: 1px solid;
+    border-radius: 5px;
+    margin: 20px;
+}
+
+.date {
+    width: 95%;
+    margin: auto;
+    border-bottom: 1px solid;
+}
+
+.category, .amount, .remark {
+    padding: 10px;
+    margin: auto;
+}
+
+.updateImg, .deleteCostImg, .deleteIncomeImg {
+    width: 30px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.icon-plus {
+    width: 60px;
+    padding: 50px;
+    cursor: pointer;
+}
+
+.icon-plus:hover, .updateImg:hover, .deleteCostImg:hover, .deleteIncomeImg:hover {
+    transform: scale(1.2);
+}
+
+.row {
+    box-sizing: inherit;
+    margin: 20px;
+}
+
+.input-field {
+    position: relative;
+}
+
+input {
+    width: 136px;
+    margin: 5px;
+}
+
+input[placeholder] {
+    padding-left: 0;
+    padding-right: 0;
+}

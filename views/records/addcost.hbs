@@ -1,0 +1,37 @@
+<h3>新增支出</h3>
+<div class="row-from">
+  <div class="row">
+    <div class="input-field">
+      <select id="categoriesList"></select>
+      <select id="pay">
+        <option>現金</option>
+        <option>銀行存款</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field">
+      <input type="date" placeholder="日期" id="inputCostDate" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field">
+      <input type="number" placeholder="金額" id="inputCostAmount" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field">
+      <input type="text" placeholder="備註" id="inputCostRemark" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div id="addCost" class="btn">新增</div>
+    <a href="/property" class="btn">取消</a>
+  </div>
+</div>
+
+<script type="text/javascript" src="/javascript/records/addcost.js"></script>
