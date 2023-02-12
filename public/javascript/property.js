@@ -1,3 +1,5 @@
+const daysOfWeek = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+
 // 取得支出紀錄
 const costRecordList = document.querySelector(".costRecordList");
 async function costList() {
@@ -7,11 +9,13 @@ async function costList() {
   let records = await response.json();
   if (records.data) {
     for (let i = 0; i < records.data.length; i++) {
+      const date = new Date(records.data[i].createdAt);
+      const dayOfWeek = daysOfWeek[date.getDay()];
       const divElement = document.createElement("div");
       divElement.className = "record";
       const dateElement = document.createElement("div");
       dateElement.className = "date";
-      const dateTitle = document.createTextNode(records.data[i].createdAt);
+      const dateTitle = document.createTextNode(records.data[i].createdAt + " " + dayOfWeek);
       const categoryElement = document.createElement("span");
       categoryElement.className = "category";
       const categoryTitle = document.createTextNode(records.data[i].categoryId.category);
@@ -20,7 +24,7 @@ async function costList() {
       const payTitle = document.createTextNode(records.data[i].pay);
       const amountElement = document.createElement("span");
       amountElement.className = "amount";
-      const amountTitle = document.createTextNode("$" + records.data[i].amount);
+      const amountTitle = document.createTextNode("$" + records.data[i].amount.toLocaleString());
       const remarkElement = document.createElement("span");
       remarkElement.className = "remark";
       const remarkTitle = document.createTextNode(records.data[i].remark);
@@ -90,11 +94,13 @@ async function incomeList() {
   let records = await response.json();
   if (records.data) {
     for (let i = 0; i < records.data.length; i++) {
+      const date = new Date(records.data[i].createdAt);
+      const dayOfWeek = daysOfWeek[date.getDay()];
       const divElement = document.createElement("div");
       divElement.className = "record";
       const dateElement = document.createElement("div");
       dateElement.className = "date";
-      const dateTitle = document.createTextNode(records.data[i].createdAt);
+      const dateTitle = document.createTextNode(records.data[i].createdAt + " " + dayOfWeek);
       const categoryElement = document.createElement("span");
       categoryElement.className = "category";
       const categoryTitle = document.createTextNode(records.data[i].categoryId.category);
@@ -103,7 +109,7 @@ async function incomeList() {
       const receiveTitle = document.createTextNode(records.data[i].receive);
       const amountElement = document.createElement("span");
       amountElement.className = "amount";
-      const amountTitle = document.createTextNode("$" + records.data[i].amount);
+      const amountTitle = document.createTextNode("$" + records.data[i].amount.toLocaleString());
       const remarkElement = document.createElement("span");
       remarkElement.className = "remark";
       const remarkTitle = document.createTextNode(records.data[i].remark);

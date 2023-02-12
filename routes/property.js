@@ -132,6 +132,8 @@ router.post("/api/add/costrecord", async (req, res) => {
               categoryId: categoriesId[i],
               pay: req.body.costPay,
               createdAt: req.body.costDate,
+              year: req.body.costDate.slice(0, -6),
+              month: req.body.costDate.slice(5, -3),
               amount: req.body.costAmount,
               remark: req.body.costRemark,
             })
@@ -181,6 +183,8 @@ router.post("/api/add/incomerecord", async (req, res) => {
               categoryId: categoriesId[i],
               receive: req.body.incomeReceive,
               createdAt: req.body.incomeDate,
+              year: req.body.incomeDate.slice(0, -6),
+              month: req.body.incomeDate.slice(5, -3),
               amount: req.body.incomeAmount,
               remark: req.body.incomeRemark,
             })
@@ -363,6 +367,8 @@ router.put("/cost/:id", async (req, res) => {
           {
             pay: update.costPay,
             createdAt: update.costDate,
+            year: update.costDate.slice(0, -6),
+            month: update.costDate.slice(5, -3),
             amount: update.costAmount,
             remark: update.costRemark,
           },
@@ -413,6 +419,8 @@ router.put("/income/:id", async (req, res) => {
             {
               receive: update.incomeReceive,
               createdAt: update.incomeDate,
+              year: update.incomeDate.slice(0, -6),
+              month: update.incomeDate.slice(5, -3),
               amount: update.incomeAmount,
               remark: update.incomeRemark
             },

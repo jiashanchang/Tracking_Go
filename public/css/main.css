@@ -60,7 +60,7 @@ nav a.sidenav-trigger, nav a.sidenav-trigger i {
 
 .sidebar{
     font-size: 20px;
-    width: 20%;
+    width: 25vw;
     height: 100vh;
     position: absolute;
     top: 0;
@@ -141,4 +141,13 @@ ul li:hover {
     padding: 0 16px;
     text-transform: uppercase;
     vertical-align: middle;
+}
+
+.btn:hover {
+    box-shadow: inset 0 0 3px 1px #ffffff;
+    font-weight: bold;
+}
+
+.red.darken {
+    background-color: #E53935 !important;
 }

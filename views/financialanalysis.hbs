@@ -1,0 +1,51 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="financial">
+  <span class="cost">支出</span>
+  <span class="income">收入</span>
+  <span class="balance">結餘</span>
+</div>
+
+<div class="month-cost" >
+  <input type="month" id="costMonth" name="month" />
+  <button type="submit" id="submitCostMonth" class="btn">查詢</button>
+</div>
+
+<div class="year-cost" >
+  <select id="selectCostYear"></select>
+  <button type="submit" id="submitCostYear" class="btn">查詢</button>
+</div>
+
+<div class="month-income" >
+  <input type="month" id="incomeMonth" name="month" />
+  <button type="submit" id="submitIncomeMonth" class="btn">查詢</button>
+</div>
+
+<div class="year-income" >
+  <select id="selectIncomeYear"></select>
+  <button type="submit" id="submitIncomeYear" class="btn">查詢</button>
+</div>
+
+<div class="month-net" >
+  <input type="month" id="netMonth" name="month" />
+  <button type="submit" id="submitNetMonth" class="btn">查詢</button>
+</div>
+
+<div class="year-net" >
+  <select id="selectNetYear"></select>
+  <button type="submit" id="submitNetYear" class="btn">查詢</button>
+</div>
+
+<div class="lasting">
+  <span class="months">月</span>
+  <span class="years">年</span>
+</div>
+
+<div class="totalCost"></div>
+<div class="totalIncome"></div>
+<div class="net"></div>
+<div id="allchart">
+  <canvas id="myChart"></canvas>
+</div>
+
+<script type="text/javascript" src="/javascript/financialanalysis.js"></script>

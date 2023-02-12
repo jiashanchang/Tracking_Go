@@ -20,6 +20,14 @@ const incomeRecordSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    year: {
+        type: String,
+        required: true,
+    },
+    month: {
+        type: String,
+        required: true,
+    },
     amount: {
         type: Number,
         trim: true,

@@ -1,0 +1,46 @@
+.financial {
+    margin: 20px;
+    display: flex;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.cost, .income, .balance {
+    width: 426px;
+    border-radius: 5px;
+    margin: auto;
+    text-align: center;
+    cursor: pointer;
+}
+
+.month-cost {
+    text-align: center;
+}
+
+.year-cost, .month-income, .year-income, .month-net, .year-net {
+    text-align: center;
+    display: none;
+}
+
+.lasting {
+    margin: 20px;
+    display: flex;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+}
+
+.months, .years {
+    width: 640px;
+    margin: auto;
+    text-align: center;
+    cursor: pointer;
+}
+
+.totalCost, .totalIncome, .net {
+    text-align: center;
+}
+
+#allchart {
+    width: 300px;
+    margin: auto;
+}
