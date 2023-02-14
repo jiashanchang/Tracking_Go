@@ -39,4 +39,4 @@ const incomeRecordSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model("incomeRecords", incomeRecordSchema);
+module.exports = mongoose.model("incomerecords", incomeRecordSchema);

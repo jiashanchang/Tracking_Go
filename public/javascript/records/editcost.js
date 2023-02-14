@@ -55,7 +55,7 @@ editCost.addEventListener("click", () => {
       },
       body: JSON.stringify({
         costCategory: selectCategories.value,
-        constPay: pay.value,
+        costPay: pay.value,
         costDate: inputCostDate.value,
         costAmount: inputCostAmount.value,
         costRemark: inputCostRemark.value,

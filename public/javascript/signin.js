@@ -86,8 +86,13 @@ login.addEventListener("click", () => {
     })
     .then(function (memberLogin) {
       if (memberLogin.ok) {
+        location.reload();
+      } else {
+        loginBottomMessage.style.display = "flex";
+        loginBottomMessage.style.color = "red";
+        loginBottomMessage.textContent = `${memberLogin.message}`;
         setTimeout(function () {
-          location.reload();
+          loginBottomMessage.style.display = "none";
         }, 2000);
       }
     });

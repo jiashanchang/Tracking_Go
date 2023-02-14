@@ -66,3 +66,22 @@ input[placeholder] {
     padding-left: 0;
     padding-right: 0;
 }
+
+.costPageNumber, .incomePageNumber {
+    display: flex;
+    justify-content: center;
+}
+
+.costPageNumber span, .incomePageNumber span {
+    width: 50px;
+    border: 1px solid;
+    margin: 10px;
+    line-height: 50px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.costPageNumber span:hover, .incomePageNumber span:hover {
+    background: #444;
+    color: #fff;
+}

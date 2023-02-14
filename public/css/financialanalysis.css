@@ -5,21 +5,25 @@
     border-radius: 5px;
 }
 
-.cost, .income, .balance {
-    width: 426px;
-    border-radius: 5px;
+.assets, .profiAndLoss, .months, .years, .assets-month, .assets-year {
+    width: 640px;
     margin: auto;
     text-align: center;
     cursor: pointer;
 }
 
-.month-cost {
-    text-align: center;
+.assetsAndLiability {
+    display: none;
 }
 
-.year-cost, .month-income, .year-income, .month-net, .year-net {
+.netAssets {
+    width: 100%;
     text-align: center;
-    display: none;
+    cursor: pointer;
+}
+
+.assets-month-net, .assets-year-net, .month-cost {
+    text-align: center;
 }
 
 .lasting {
@@ -29,14 +33,20 @@
     border-bottom: 1px solid;
 }
 
-.months, .years {
-    width: 640px;
+.cost, .income, .balance {
+    width: 426px;
+    border-radius: 5px;
     margin: auto;
     text-align: center;
     cursor: pointer;
 }
 
-.totalCost, .totalIncome, .net {
+.year-cost, .month-income, .year-income, .month-net, .year-net {
+    text-align: center;
+    display: none;
+}
+
+.totalCost, .totalIncome, .net, .detailList, .net-assets {
     text-align: center;
 }
 

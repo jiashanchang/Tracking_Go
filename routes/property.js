@@ -365,6 +365,7 @@ router.put("/cost/:id", async (req, res) => {
         costRecord.findOneAndUpdate(
           { _id: req.params.id },
           {
+            categoryId: category._id,
             pay: update.costPay,
             createdAt: update.costDate,
             year: update.costDate.slice(0, -6),
@@ -417,6 +418,7 @@ router.put("/income/:id", async (req, res) => {
           update.incomeCategory = category._id
           incomeRecord.findOneAndUpdate({_id: req.params.id},
             {
+              categoryId: category._id,
               receive: update.incomeReceive,
               createdAt: update.incomeDate,
               year: update.incomeDate.slice(0, -6),
