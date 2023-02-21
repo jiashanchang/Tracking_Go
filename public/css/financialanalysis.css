@@ -5,24 +5,14 @@
     border-radius: 5px;
 }
 
-.assets, .profiAndLoss, .months, .years, .assets-month, .assets-year {
+.months, .years {
     width: 640px;
     margin: auto;
     text-align: center;
     cursor: pointer;
 }
 
-.assetsAndLiability {
-    display: none;
-}
-
-.netAssets {
-    width: 100%;
-    text-align: center;
-    cursor: pointer;
-}
-
-.assets-month-net, .assets-year-net, .month-cost {
+.month-cost {
     text-align: center;
 }
 
@@ -46,7 +36,7 @@
     display: none;
 }
 
-.totalCost, .totalIncome, .net, .detailList, .net-assets {
+.totalCost, .totalIncome, .net, .detailList {
     text-align: center;
 }
 

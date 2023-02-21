@@ -10,10 +10,10 @@ const costCategorySchema = new mongoose.Schema({
     },
     recordId: [
         {
-        type: Schema.Types.ObjectId,
-        ref: "costrecords",
+            type: Schema.Types.ObjectId,
+            ref: "costrecords",
         },
     ],
-});
+}, { versionKey: false });
 
 module.exports = mongoose.model("costcategories", costCategorySchema);

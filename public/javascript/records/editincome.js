@@ -8,6 +8,7 @@ async function getIncomeRecordData() {
   let incomeData = await response.json();
   if (incomeData.data) {
     document.getElementById("categoriesList").value = `${incomeData.data.categoryId.category}`;
+    document.getElementById("receive").value = `${incomeData.data.receiveId.category}`;
     document.getElementById("inputIncomeDate").value = `${incomeData.data.createdAt}`;
     document.getElementById("inputIncomeAmount").value = `${incomeData.data.amount}`;
     document.getElementById("inputIncomeRemark").value = `${incomeData.data.remark}`;
@@ -35,6 +36,26 @@ async function searchCategories() {
 }
 
 searchCategories();
+
+// 取得資產負債分類選單
+async function assetLiabilityCategories() {
+  let response = await fetch("/property/api/asset-and-liability-categories", {
+    method: "GET",
+  });
+  let getCategories = await response.json();
+  if (getCategories) {
+    for (let i = 0; i < getCategories.data.length; i++) {
+      const receiveListElement = document.getElementById("receive");
+      const categories = document.createElement("option");
+      categories.setAttribute("class", "categories");
+      const categoriesTitle = document.createTextNode(getCategories.data[i].category);
+      receiveListElement.appendChild(categories);
+      categories.appendChild(categoriesTitle);
+    }
+  }
+}
+
+assetLiabilityCategories();
 
 // 修改收入
 const warnForm = document.getElementById("warnForm");

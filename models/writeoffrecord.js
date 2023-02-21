@@ -1,16 +1,16 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const incomeRecordSchema = new mongoose.Schema({
+const writeOffRecordSchema = new mongoose.Schema({
     memberId: {
         type: Schema.Types.ObjectId,
         ref: "members",
         index: true,
         required: true,
     },
-    categoryId: {
+    payId: {
         type: Schema.Types.ObjectId,
-        ref: "incomecategories",
+        ref: "assetliabilitycategories",
     },
     receiveId: {
         type: Schema.Types.ObjectId,
@@ -39,4 +39,4 @@ const incomeRecordSchema = new mongoose.Schema({
     },
 }, { versionKey: false });
 
-module.exports = mongoose.model("incomerecords", incomeRecordSchema);
+module.exports = mongoose.model("writeoffrecords", writeOffRecordSchema);

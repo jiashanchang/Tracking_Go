@@ -1,40 +1,23 @@
-const assets = document.querySelector(".assets");
-const profiAndLoss = document.querySelector(".profiAndLoss");
-
-const assetsAndLiability = document.querySelector(".assetsAndLiability");
 const costAndIncome = document.querySelector(".costAndIncome");
-
-const netAssets = document.querySelector(".netAssets");
-
 const cost = document.querySelector(".cost");
 const income = document.querySelector(".income");
 const balance = document.querySelector(".balance");
-
-const assetsMonth = document.querySelector(".assets-month");
-const assetsYear = document.querySelector(".assets-year");
 const months = document.querySelector(".months");
 const years = document.querySelector(".years");
-
 const monthCost = document.querySelector(".month-cost");
 const yearCost = document.querySelector(".year-cost");
 const monthIncome = document.querySelector(".month-income");
 const yearIncome = document.querySelector(".year-income");
 const monthNet = document.querySelector(".month-net");
 const yearNet = document.querySelector(".year-net");
-const monthAssetsNet = document.querySelector(".assets-month-net");
-const yearAssetsNet = document.querySelector(".assets-year-net");
-
 const totalCost = document.querySelector(".totalCost");
 const totalIncome = document.querySelector(".totalIncome");
 const net = document.querySelector(".net");
-const allNetAssets = document.querySelector(".net-assets");
-
 const detailList = document.querySelector(".detailList");
 
 window.onload = function () {
     cost.style.backgroundColor = "yellow";
     months.style.backgroundColor = "yellow";
-    profiAndLoss.style.backgroundColor = "yellow";
 };
 
 // 默認本月份
@@ -48,7 +31,6 @@ let today = year + "-" + month;
 document.getElementById("costMonth").value = today;
 document.getElementById("incomeMonth").value = today;
 document.getElementById("netMonth").value = today;
-document.getElementById("assetsNetMonth").value = today;
 
 // 支出年份選單
 const selectCostYear = document.getElementById("selectCostYear");
@@ -80,16 +62,6 @@ for (let j = 2020; j < 2100; j++) {
     document.getElementById("selectNetYear").value = year + "年";
 }
 
-// 淨資產年份選單
-const selectAssetsNetYear = document.getElementById("selectAssetsNetYear");
-for (let j = 2020; j < 2100; j++) {
-    const option = document.createElement("option");
-    option.setAttribute("class", "year");
-    option.appendChild(document.createTextNode(j + "年"));
-    selectAssetsNetYear.appendChild(option);
-    document.getElementById("selectAssetsNetYear").value = year + "年";
-}
-
 // 支出顏色
 const doughnutCostColor = [
     "#67001D",
@@ -116,12 +88,6 @@ const doughnutIncomeColor = [
 const doughnutNetColor = [
     "#FABED2",
     "#CBF1F5",
-];
-
-// 淨資產顏色
-const doughnutNetAssetsColor = [
-    "#001D4A",
-    "#006992",
 ];
 
 // 移除甜甜圈
@@ -428,162 +394,6 @@ async function yearlyNetIncome() {
 
 const submitNetYear = document.getElementById("submitNetYear");
 submitNetYear.addEventListener("click", yearlyNetIncome);
-
-// 月淨資產
-async function monthlyNetAssets() {
-    const assetsNetMonth = document.getElementById("assetsNetMonth").value;
-    let response = await fetch(`/financialanalysis/api/monthly/net?month=${assetsNetMonth}`,{
-        method: "GET",
-    });
-    let records = await response.json();
-    detailList.innerHTML = "";
-    let payCash = 0;
-    let payBank = 0;
-    let receiveCash = 0;
-    let receiveBank = 0;
-    for (let i = 0; i < records.data.costAmountList.length; i++) {
-        if (records.data.costAmountList[i].pay === "現金") {
-            payCash += records.data.costAmountList[i].amount;
-        }
-        if (records.data.costAmountList[i].pay === "銀行存款") {
-            payBank += records.data.costAmountList[i].amount;
-        }
-    }
-    for (let i = 0; i < records.data.incomeAmountList.length; i++) {
-        if (records.data.incomeAmountList[i].receive === "現金") {
-            receiveCash += records.data.incomeAmountList[i].amount;
-        }
-        if (records.data.incomeAmountList[i].receive === "銀行存款") {
-            receiveBank += records.data.incomeAmountList[i].amount;
-        }
-    }
-
-    const netCash = receiveCash - payCash;
-    const netBank = receiveBank - payBank;
-    const netAssetsAmount = netCash + netBank;
-    const formattedDate = assetsNetMonth.replace("-", "年");
-    allNetAssets.textContent = formattedDate + "月淨資產 $" + netAssetsAmount.toLocaleString();
-
-    const costAndIncome = ["現金", "銀行存款"];
-    const costAndIncomeAmount = [netCash, netBank];
-
-    getDoughnut(costAndIncome, costAndIncomeAmount, doughnutNetAssetsColor);
-}
-
-const submitAssetNetMonth = document.getElementById("submitAssetNetMonth");
-submitAssetNetMonth.addEventListener("click", monthlyNetAssets);
-
-// 年淨資產
-async function yearlyNetAssets() {
-    const selectAssetsNetYear = document.getElementById("selectAssetsNetYear").value;
-    let response = await fetch(`/financialanalysis/api/yearly/net?year=${selectAssetsNetYear}`,{
-        method: "GET",
-    });
-    let records = await response.json();
-    detailList.innerHTML = "";
-    let payCash = 0;
-    let payBank = 0;
-    let receiveCash = 0;
-    let receiveBank = 0;
-    for (let i = 0; i < records.data.costAmountList.length; i++) {
-        if (records.data.costAmountList[i].pay === "現金") {
-            payCash += records.data.costAmountList[i].amount;
-        }
-        if (records.data.costAmountList[i].pay === "銀行存款") {
-            payBank += records.data.costAmountList[i].amount;
-        }
-    }
-    for (let i = 0; i < records.data.incomeAmountList.length; i++) {
-        if (records.data.incomeAmountList[i].receive === "現金") {
-            receiveCash += records.data.incomeAmountList[i].amount;
-        }
-        if (records.data.incomeAmountList[i].receive === "銀行存款") {
-            receiveBank += records.data.incomeAmountList[i].amount;
-        }
-    }
-
-    const netCash = receiveCash - payCash;
-    const netBank = receiveBank - payBank;
-    const netAssetsAmount = netCash + netBank;
-    allNetAssets.textContent = selectAssetsNetYear + "淨資產 $" + netAssetsAmount.toLocaleString();
-
-    const costAndIncome = ["現金", "銀行存款"];
-    const costAndIncomeAmount = [netCash, netBank];
-
-    getDoughnut(costAndIncome, costAndIncomeAmount, doughnutNetAssetsColor);
-}
-
-const submitAssetsNetYear = document.getElementById("submitAssetsNetYear");
-submitAssetsNetYear.addEventListener("click", yearlyNetAssets);
-
-// 點擊資產/負債
-assets.addEventListener("click", function(){
-    if (this.style.backgroundColor === "") {
-        this.style.backgroundColor = "yellow";
-        profiAndLoss.style.backgroundColor = "";
-        assetsYear.style.backgroundColor = "";
-        netAssets.style.backgroundColor = "yellow";
-        assetsMonth.style.backgroundColor = "yellow";
-        costAndIncome.style.display = "none";
-        assetsAndLiability.style.display = "block";
-        yearAssetsNet.style.display = "none";
-        monthAssetsNet.style.display = "block";
-        allNetAssets.style.display = "block";
-        monthlyNetAssets();
-    } else {
-        this.style.backgroundColor = "yellow";
-    }
-})
-
-// 點擊損益
-profiAndLoss.addEventListener("click", function(){
-    if (this.style.backgroundColor === "") {
-        this.style.backgroundColor = "yellow";
-        assets.style.backgroundColor = "";
-        income.style.backgroundColor = "";
-        balance.style.backgroundColor = "";
-        years.style.backgroundColor = "";
-        cost.style.backgroundColor = "yellow";
-        months.style.backgroundColor = "yellow";
-        assetsAndLiability.style.display = "none";
-        costAndIncome.style.display = "block";
-        chooseCostMonthList();
-    } else {
-        this.style.backgroundColor = "yellow";
-    }
-})
-
-// 點擊資產月
-assetsMonth.addEventListener("click", function(){
-    if (this.style.backgroundColor === "") {
-        this.style.backgroundColor = "yellow";
-        assetsYear.style.backgroundColor = "";
-        profiAndLoss.style.backgroundColor = "";
-        assets.style.backgroundColor = "yellow";
-        netAssets.style.backgroundColor = "yellow";
-        yearAssetsNet.style.display = "none";
-        monthAssetsNet.style.display = "block";
-        monthlyNetAssets();
-    } else {
-        this.style.backgroundColor = "yellow";
-    }
-})
-
-// 點擊資產年
-assetsYear.addEventListener("click", function(){
-    if (this.style.backgroundColor === "") {
-        this.style.backgroundColor = "yellow";
-        assetsMonth.style.backgroundColor = "";
-        profiAndLoss.style.backgroundColor = "";
-        assets.style.backgroundColor = "yellow";
-        netAssets.style.backgroundColor = "yellow";
-        monthAssetsNet.style.display = "none";
-        yearAssetsNet.style.display = "block";
-        yearlyNetAssets();
-    } else {
-        this.style.backgroundColor = "yellow";
-    }
-})
 
 // 點擊支出
 cost.addEventListener("click", function () {

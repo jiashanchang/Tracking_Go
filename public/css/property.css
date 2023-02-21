@@ -32,7 +32,7 @@
     margin: auto;
 }
 
-.updateImg, .deleteCostImg, .deleteIncomeImg {
+.updateImg, .deleteCostImg, .deleteIncomeImg, .deleteWriteOffImg, .deleteTaxImg {
     width: 30px;
     cursor: pointer;
     padding: 10px;
@@ -44,7 +44,7 @@
     cursor: pointer;
 }
 
-.icon-plus:hover, .updateImg:hover, .deleteCostImg:hover, .deleteIncomeImg:hover {
+.icon-plus:hover, .updateImg:hover, .deleteCostImg:hover, .deleteIncomeImg:hover, .deleteWriteOffImg:hover {
     transform: scale(1.2);
 }
 
@@ -67,12 +67,12 @@ input[placeholder] {
     padding-right: 0;
 }
 
-.costPageNumber, .incomePageNumber {
+.costPageNumber, .incomePageNumber, .writeOffPageNumber, .incomeTaxPageNumber {
     display: flex;
     justify-content: center;
 }
 
-.costPageNumber span, .incomePageNumber span {
+.costPageNumber span, .incomePageNumber span, .writeOffPageNumber span, .incomeTaxPageNumber span {
     width: 50px;
     border: 1px solid;
     margin: 10px;
@@ -81,7 +81,7 @@ input[placeholder] {
     cursor: pointer;
 }
 
-.costPageNumber span:hover, .incomePageNumber span:hover {
+.costPageNumber span:hover, .incomePageNumber span:hover, .writeOffPageNumber span:hover, .incomeTaxPageNumber span:hover {
     background: #444;
     color: #fff;
 }

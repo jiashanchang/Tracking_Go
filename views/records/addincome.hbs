@@ -3,10 +3,7 @@
   <div class="row">
     <div class="input-field">
       <select id="categoriesList"></select>
-      <select id="receive">
-        <option>現金</option>
-        <option>銀行存款</option>
-      </select>
+      <select id="receive"></select>
     </div>
   </div>
 
@@ -18,7 +15,7 @@
 
   <div class="row">
     <div class="input-field">
-      <input type="number" placeholder="金額" id="inputIncomeAmount" />
+      <input type="text" placeholder="金額" id="inputIncomeAmount" onkeyup="this.value=this.value.replace(/\D/g,'').replace(/^0{1,}/g,'')" />
     </div>
   </div>
 

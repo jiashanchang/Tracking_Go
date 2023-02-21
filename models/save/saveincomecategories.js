@@ -5,19 +5,19 @@ const db = mongoose.connection;
 db.once("open", () => {
   incomeCategory.create(
     {
-      category: "薪水",
+      category: "薪資收入",
     },
     {
-      category: "買賣",
+      category: "租賃收入",
     },
     {
-      category: "投資",
+      category: "股利收入",
     },
     {
-      category: "副業",
+      category: "利息收入",
     },
     {
-      category: "其他",
+      category: "其他收入",
     }
   )
   .then(() => {

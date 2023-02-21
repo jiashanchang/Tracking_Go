@@ -12,9 +12,9 @@ const costRecordSchema = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: "costcategories",
     },
-    pay: {
-        type: String,
-        required: true,
+    payId: {
+        type: Schema.Types.ObjectId,
+        ref: "assetliabilitycategories",
     },
     createdAt: {
         type: String,
@@ -37,6 +37,6 @@ const costRecordSchema = new mongoose.Schema({
         type: String,
         trim: true,
     },
-});
+}, { versionKey: false });
 
 module.exports = mongoose.model("costrecords", costRecordSchema);

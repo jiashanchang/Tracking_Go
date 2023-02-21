@@ -1,0 +1,37 @@
+<h3>修改所得稅費用/利益</h3>
+<div class="row">
+  <div class="row">
+    <div class="input-field">
+      <select id="income-tax">
+        <option>所得稅費用</option>
+        <option>所得稅利益</option>
+      </select>
+      <select id="taxPay"></select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field">
+      <input type="date" placeholder="日期" id="inputTaxDate" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field">
+      <input type="text" placeholder="金額" id="inputTaxAmount" onkeyup="this.value=this.value.replace(/\D/g,'').replace(/^0{1,}/g,'')" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field">
+      <input type="text" placeholder="備註" id="inputTaxRemark" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div id="editTax" class="btn red darken">修改</div>
+    <a href="/property" class="btn">取消</a>
+  </div>
+</div>
+
+<script type="text/javascript" src="/javascript/records/editincometax.js"></script>

@@ -10,10 +10,10 @@ const incomeCategorySchema = new mongoose.Schema({
     },
     recordId: [
         {
-        type: Schema.Types.ObjectId,
-        ref: "incomerecords",
+            type: Schema.Types.ObjectId,
+            ref: "incomerecords",
         },
     ],
-});
+}, { versionKey: false });
 
 module.exports = mongoose.model("incomecategories", incomeCategorySchema);

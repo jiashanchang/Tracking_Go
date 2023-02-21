@@ -20,6 +20,6 @@ const memberSchema = new mongoose.Schema({
         trim: true,
         minlength: 8,
     },
-});
+}, { versionKey: false });
 
 module.exports = mongoose.model("members", memberSchema);

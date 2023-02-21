@@ -8,7 +8,7 @@ async function getCostRecordData() {
   let costData = await response.json();
   if (costData.data) {
     document.getElementById("categoriesList").value = `${costData.data.categoryId.category}`;
-    document.getElementById("pay").value = `${costData.data.pay}`
+    document.getElementById("pay").value = `${costData.data.payId.category}`;
     document.getElementById("inputCostDate").value = `${costData.data.createdAt}`;
     document.getElementById("inputCostAmount").value = `${costData.data.amount}`;
     document.getElementById("inputCostRemark").value = `${costData.data.remark}`;
@@ -36,6 +36,26 @@ async function searchCategories() {
 }
 
 searchCategories();
+
+// 取得資產負債分類選單
+async function assetLiabilityCategories() {
+  let response = await fetch("/property/api/asset-and-liability-categories", {
+    method: "GET",
+  });
+  let getCategories = await response.json();
+  if (getCategories) {
+    for (let i = 0; i < getCategories.data.length; i++) {
+      const payListElement = document.getElementById("pay");
+      const categories = document.createElement("option");
+      categories.setAttribute("class", "categories");
+      const categoriesTitle = document.createTextNode(getCategories.data[i].category);
+      payListElement.appendChild(categories);
+      categories.appendChild(categoriesTitle);
+    }
+  }
+}
+
+assetLiabilityCategories();
 
 // 修改支出
 const warnForm = document.getElementById("warnForm");

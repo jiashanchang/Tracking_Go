@@ -18,6 +18,26 @@ async function searchCategories() {
 
 searchCategories();
 
+// 取得資產負債分類選單
+async function assetLiabilityCategories() {
+  let response = await fetch("/property/api/asset-and-liability-categories", {
+    method: "GET",
+  });
+  let getCategories = await response.json();
+  if (getCategories) {
+    for (let i = 0; i < getCategories.data.length; i++) {
+      const receiveListElement = document.getElementById("receive");
+      const categories = document.createElement("option");
+      categories.setAttribute("class", "categories");
+      const categoriesTitle = document.createTextNode(getCategories.data[i].category);
+      receiveListElement.appendChild(categories);
+      categories.appendChild(categoriesTitle);
+    }
+  }
+}
+
+assetLiabilityCategories();
+
 // 日期默認今天
 let date = new Date();
 let day = date.getDate();
@@ -31,7 +51,6 @@ if (day < 10) {
 }
 let today = year + "-" + month + "-" + day;
 document.getElementById("inputIncomeDate").value = today;
-document.getElementById("inputIncomeAmount").value = 0;
 
 // 新增收入
 const warnForm = document.getElementById("warnForm");

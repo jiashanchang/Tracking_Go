@@ -1,18 +1,18 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const incomeRecordSchema = new mongoose.Schema({
+const taxRecordSchema = new mongoose.Schema({
     memberId: {
         type: Schema.Types.ObjectId,
         ref: "members",
         index: true,
         required: true,
     },
-    categoryId: {
-        type: Schema.Types.ObjectId,
-        ref: "incomecategories",
+    incomeTax: {
+        type: String,
+        required: true,
     },
-    receiveId: {
+    taxPayId: {
         type: Schema.Types.ObjectId,
         ref: "assetliabilitycategories",
     },
@@ -39,4 +39,4 @@ const incomeRecordSchema = new mongoose.Schema({
     },
 }, { versionKey: false });
 
-module.exports = mongoose.model("incomerecords", incomeRecordSchema);
+module.exports = mongoose.model("taxrecords", taxRecordSchema);
