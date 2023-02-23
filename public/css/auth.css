@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    background-color: #F9F7F0;
 }
 
 #loginForm, #registerForm {
@@ -8,9 +9,6 @@ body {
     top: 80px;
     left: 50%;
     width: 340px;
-    background: #FFFFFF;
-    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);
-    border-radius: 2px;
     display: none;
 }
   

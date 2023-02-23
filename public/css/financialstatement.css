@@ -1,3 +1,13 @@
+.balance-sheet {
+    margin: 10px 30px 100px 30px;
+    font-weight: bold;
+}
+
+.income-statement {
+    margin: 100px 30px 70px 30px;
+    font-weight: bold;
+}
+
 .title {
     font-size: 30px;
     font-weight: bold;
@@ -21,7 +31,6 @@
     grid-template-columns: 58% 20% 20%;
     gap: 1%;
     text-align: center;
-    height: 800px;
 }
 
 .line {
@@ -35,12 +44,15 @@
 
 .items {
     text-align: left;
-    margin: 10px;
+    margin-left: 20px;
 }
 
 .amounts, .percentage {
     text-align: center;
-    margin: 10px;
+}
+
+.move {
+    margin-left: 40px;
 }
 
 .left {
@@ -59,6 +71,10 @@
 .liability-account {
     text-align: center;
     border-bottom: 1px solid;
+}
+
+.net-profit-or-loss {
+    margin-left: 20px;
 }
 
 .amount-after-tax, .percent-after-tax {

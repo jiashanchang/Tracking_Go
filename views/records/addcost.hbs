@@ -1,33 +1,35 @@
-<h3>新增支出</h3>
-<div class="row">
+<div class="block">
+  <div class="create">新增支出明細</div>
   <div class="row">
     <div class="input-field">
-      <select id="categoriesList"></select>
-      <select id="pay"></select>
+      支出項目：<select id="categoriesList"></select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field">付款方式：<select id="pay"></select></div>
+  </div>
+
+  <div class="row">
+    <div class="input-field">
+      支付日期：<input type="date" placeholder="日期" id="inputCostDate" />
     </div>
   </div>
 
   <div class="row">
     <div class="input-field">
-      <input type="date" placeholder="日期" id="inputCostDate" />
+      支付金額：<input type="text" placeholder="金額" id="inputCostAmount" onkeyup="this.value=this.value.replace(/\D/g,'').replace(/^0{1,}/g,'')" />
     </div>
   </div>
 
   <div class="row">
     <div class="input-field">
-      <input type="text" placeholder="金額" id="inputCostAmount" onkeyup="this.value=this.value.replace(/\D/g,'').replace(/^0{1,}/g,'')" />
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="input-field">
-      <input type="text" placeholder="備註" id="inputCostRemark" />
+      備註：<input type="text" placeholder="備註" id="inputCostRemark" />
     </div>
   </div>
 
   <div class="row">
     <div id="addCost" class="btn red darken">新增</div>
-    <a href="/property" class="btn">取消</a>
+    <a href="/property" class="btn right">取消</a>
   </div>
 </div>
 

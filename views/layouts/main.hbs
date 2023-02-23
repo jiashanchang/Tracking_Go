@@ -5,40 +5,51 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <link rel="stylesheet" href="/css/home.css" />
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/property.css" />
     <link rel="stylesheet" href="/css/financialanalysis.css" />
     <link rel="stylesheet" href="/css/financialstatement.css" />
+    <link rel="stylesheet" href="/css/error.css" />
 
     <title>記帳趣</title>
   </head>
   <body>
-    <nav class="gray darken">
-      <div class="nav-wrapper contain">
-        <div class="brand-logo center">記帳趣</div>
-        <div class="sidenav-trigger">
-          <i class="fas fa-bars"></i>
+    <div class="planning">
+      <div class="top">
+        <div class="topTitle">
+          <a href="/"><div class="project-name">
+              <i class="fas fa-book-reader"></i>記帳趣
+            </div></a>
+          <label for="burger">
+            <img src="/images/icon_burger.jpg" class="sidenav-trigger" />
+          </label>
+          <div class="menu">
+            <a href="/property"><span class="topic-choice selection">記帳本</span></a>
+            <a href="/financialanalysis"><span class="topic-choice selection">財務分析</span></a>
+            <a href="/financialstatement"><span class="topic-choice selection">財務報表</span></a>
+            <a href="/membercenter"><span class="topic-choice selection">會員中心</span></a>
+            <a id="signout"><span class="topic-choice selection">登出</span></a>
+          </div>
+          <div class="open-menu">
+            <a href="/property"><span class="topic-choice selection">記帳本</span></a>
+            <a href="/financialanalysis"><span class="topic-choice selection">財務分析</span></a>
+            <a href="/financialstatement"><span class="topic-choice selection">財務報表</span></a>
+            <a href="/membercenter"><span class="topic-choice selection">會員中心</span></a>
+            <a id="signout"><span class="topic-choice selection">登出</span></a>
+          </div>
         </div>
       </div>
-    </nav>
-    <div class="sidebar">
-      <ul>
-        <li><a href="/property">記帳本</a></li>
-         <li><a href="/financialanalysis">財務分析</a></li>
-        <li><a href="/financialstatement">財務報表</a></li>
-        <li><a href="/membercenter">會員中心</a></li>
-        <li><a id="signout">登出</a></li>
-      </ul>
-    </div>
 
-    <div id="warnForm">
-      <div id="cover">
-        <div id="warn"></div>
+      <div id="warnForm">
+        <div id="cover">
+          <div id="warn"></div>
+        </div>
       </div>
+
+      <div class="contain">{{{body}}}</div>
+      <footer>COPYRIGHT © 2023 記帳趣</footer>
     </div>
-
-    <div class="contain">{{{body}}}</div>
-
   </body>
 
   <script

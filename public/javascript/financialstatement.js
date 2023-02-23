@@ -411,7 +411,7 @@ async function getReport() {
     // 負債及權益總額
     const netProfitLoss = beforeTax + totalTaxAmount;
     const totalLiabilityAndEquity = currentLiabilitySum + nonCurrentLiabilitySum + netProfitLoss;
-    totalLiabilityAndEquityAmount.textContent = totalLiabilityAndEquity.toLocaleString();
+    totalLiabilityAndEquityAmount.textContent = "$" + totalLiabilityAndEquity.toLocaleString();
 
     // 再計算各科目金額占比
     let currentAssetPercentSum = 0;
@@ -420,19 +420,34 @@ async function getReport() {
     let nonCurrentLiabilityPercentSum = 0;
     let totalTaxPercentSum = 0;
     for (const label in result) {
-        const percentages = (currentAssetSum + nonCurrentAssetSum + currentLiabilitySum + nonCurrentLiabilitySum + netProfitLoss) / 2;
+        const percentages =(currentAssetSum + nonCurrentAssetSum + currentLiabilitySum + nonCurrentLiabilitySum + netProfitLoss) / 2;
         const eachAmount = parseInt(result[label]);
-        if (label === "短期借款" ||label === "預收款項" ||label === "其他應付款") {
-            currentLiabilityPercent.innerHTML += `<div>${Math.round((eachAmount / percentages) * 100)}%</div>`;
-            currentLiabilityPercentSum += Math.round((eachAmount / percentages) * 100);
+        if (label === "短期借款" || label === "預收款項" || label === "其他應付款") {
+            if (percentages === 0) {
+                currentLiabilityPercent.innerHTML += `<div>0%</div>`;
+                currentLiabilityPercentSum += 0;
+            } else {
+                currentLiabilityPercent.innerHTML += `<div>${Math.round((eachAmount / percentages) * 100)}%</div>`;
+                currentLiabilityPercentSum += Math.round((eachAmount / percentages) * 100);
+            }
         } else if (label === "存入保證金" || label === "長期借款") {
-            nonCurrentLiabilityPercent.innerHTML += `<div>${Math.round((eachAmount / percentages) * 100)}%</div>`;
-            nonCurrentLiabilityPercentSum += Math.round((eachAmount / percentages) * 100);
+            if (percentages === 0) {
+                nonCurrentLiabilityPercent.innerHTML += `<div>0%</div>`;
+                nonCurrentLiabilityPercentSum += 0;
+            } else {
+                nonCurrentLiabilityPercent.innerHTML += `<div>${Math.round((eachAmount / percentages) * 100)}%</div>`;
+                nonCurrentLiabilityPercentSum += Math.round((eachAmount / percentages) * 100);
+            }
         } else if (label === "存出保證金") {
-            nonCurrentAssetPercent.innerHTML += `<div>${Math.round((eachAmount / percentages) * 100)}%</div>`;
-            nonCurrentAssetPercentSum += Math.round((eachAmount / percentages) * 100);
+            if (percentages === 0) {
+                nonCurrentAssetPercent.innerHTML += `<div>0%</div>`;
+                nonCurrentAssetPercentSum += 0;
+            } else {
+                nonCurrentAssetPercent.innerHTML += `<div>${Math.round((eachAmount / percentages) * 100)}%</div>`;
+                nonCurrentAssetPercentSum += Math.round((eachAmount / percentages) * 100);
+            }
         } else if (label === "所得稅費用" || label === "所得稅利益") {
-            if (incomeSum ===0){
+            if (incomeSum === 0) {
                 taxPercent.innerHTML += `<div>0%</div>`;
                 totalTaxPercentSum += 0;
             } else {
@@ -440,8 +455,13 @@ async function getReport() {
                 totalTaxPercentSum += Math.round((eachAmount / incomeSum) * 100);
             }
         } else {
-            currentAssetPercent.innerHTML += `<div>${Math.round((eachAmount / percentages) * 100)}%</div>`;
-            currentAssetPercentSum += Math.round((eachAmount / percentages) * 100);
+            if (percentages === 0) {
+                currentAssetPercent.innerHTML += `<div>0%</div>`;
+                currentAssetPercentSum += 0;
+            } else {
+                currentAssetPercent.innerHTML += `<div>${Math.round((eachAmount / percentages) * 100)}%</div>`;
+                currentAssetPercentSum += Math.round((eachAmount / percentages) * 100);
+            }
         }
     }
 
@@ -459,7 +479,11 @@ async function getReport() {
     if (totalLiabilitySum === 0) {
         totalLiabilityPercentSum = 0;
     } else {
-        totalLiabilityPercentSum = Math.round((totalLiabilitySum / totalLiabilityAndEquity) * 100);
+        if (totalLiabilityAndEquity === 0) {
+            totalLiabilityPercentSum = 0;
+        } else {
+            totalLiabilityPercentSum = Math.round((totalLiabilitySum / totalLiabilityAndEquity) * 100);
+        }
     }
 
     // 總負債及權益%
@@ -475,7 +499,11 @@ async function getReport() {
     if (netProfitLoss === 0) {
         netProfitOrLossPercentSum = 0;
     } else {
-        netProfitOrLossPercentSum = Math.round((netProfitLoss / (currentLiabilitySum + nonCurrentLiabilitySum + netProfitLoss)) * 100);
+        if (totalLiabilityAndEquity === 0) {
+            netProfitOrLossPercentSum = 0;
+        } else {
+            netProfitOrLossPercentSum = Math.round((netProfitLoss / (currentLiabilitySum + nonCurrentLiabilitySum + netProfitLoss)) * 100);
+        }
     }
 
     // 資產、%
@@ -483,7 +511,7 @@ async function getReport() {
     totalCurrentAssetPercent.textContent = currentAssetPercentSum + "%";
     totalNonCurrentAssetAmount.textContent = nonCurrentAssetSum.toLocaleString();
     totalNonCurrentAssetPercent.textContent = nonCurrentAssetPercentSum + "%";
-    totalAssetAmout.textContent = (currentAssetSum + nonCurrentAssetSum).toLocaleString();
+    totalAssetAmout.textContent = "$" + (currentAssetSum + nonCurrentAssetSum).toLocaleString();
     totalAssetPercent.textContent = assetPercentSum + "%";
 
     // 負債、%
@@ -507,7 +535,7 @@ async function getReport() {
     totalExpenseAmount.textContent = costSum.toLocaleString();
     totalExpensePercent.textContent = costPercentSum + "%";
     percentBeforeTax.textContent = incomeSumPercent + costPercentSum + "%";
-    amountAfterTax.textContent = netProfitLoss.toLocaleString();
+    amountAfterTax.textContent = "$" + netProfitLoss.toLocaleString();
     percentAfterTax.textContent = incomeSumPercent + costPercentSum + totalTaxPercentSum + "%";
 };
 

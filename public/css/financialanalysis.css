@@ -38,6 +38,7 @@
 
 .totalCost, .totalIncome, .net, .detailList {
     text-align: center;
+    font-weight: bold;
 }
 
 #allchart {

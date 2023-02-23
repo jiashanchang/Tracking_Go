@@ -16,8 +16,8 @@ const net = document.querySelector(".net");
 const detailList = document.querySelector(".detailList");
 
 window.onload = function () {
-    cost.style.backgroundColor = "yellow";
-    months.style.backgroundColor = "yellow";
+    cost.style.backgroundColor = "pink";
+    months.style.backgroundColor = "pink";
 };
 
 // 默認本月份
@@ -398,10 +398,10 @@ submitNetYear.addEventListener("click", yearlyNetIncome);
 // 點擊支出
 cost.addEventListener("click", function () {
   if (this.style.backgroundColor === "") {
-    this.style.backgroundColor = "yellow";
+    this.style.backgroundColor = "pink";
     income.style.backgroundColor = "";
     balance.style.backgroundColor = "";
-    if (months.style.backgroundColor === "yellow") {
+    if (months.style.backgroundColor === "pink") {
         monthIncome.style.display = "none";
         yearCost.style.display = "none";
         yearIncome.style.display = "none";
@@ -413,7 +413,7 @@ cost.addEventListener("click", function () {
         totalCost.style.display = "block";
         chooseCostMonthList();
     }
-    if (years.style.backgroundColor === "yellow") {
+    if (years.style.backgroundColor === "pink") {
         monthCost.style.display = "none";
         monthIncome.style.display = "none";
         yearIncome.style.display = "none";
@@ -426,17 +426,17 @@ cost.addEventListener("click", function () {
         costYearList();
     }
   } else {
-    this.style.backgroundColor = "yellow";
+    this.style.backgroundColor = "pink";
   }
 });
 
 // 點擊收入
 income.addEventListener("click", function () {
   if (this.style.backgroundColor === "") {
-    this.style.backgroundColor = "yellow";
+    this.style.backgroundColor = "pink";
     cost.style.backgroundColor = "";
     balance.style.backgroundColor = "";
-    if (months.style.backgroundColor === "yellow") {
+    if (months.style.backgroundColor === "pink") {
         monthCost.style.display = "none";
         yearCost.style.display = "none";
         yearIncome.style.display = "none";
@@ -448,7 +448,7 @@ income.addEventListener("click", function () {
         totalIncome.style.display = "block";
         chooseIncomeMonthList();
     }
-    if (years.style.backgroundColor === "yellow") {
+    if (years.style.backgroundColor === "pink") {
         monthCost.style.display = "none";
         monthIncome.style.display = "none";
         yearCost.style.display = "none";
@@ -461,17 +461,17 @@ income.addEventListener("click", function () {
         incomeYearList();
     }
   } else {
-    this.style.backgroundColor = "yellow";
+    this.style.backgroundColor = "pink";
   }
 });
 
 // 點擊結餘
 balance.addEventListener("click", function () {
   if (this.style.backgroundColor === "") {
-    this.style.backgroundColor = "yellow";
+    this.style.backgroundColor = "pink";
     income.style.backgroundColor = "";
     cost.style.backgroundColor = "";
-    if (months.style.backgroundColor === "yellow") {
+    if (months.style.backgroundColor === "pink") {
         monthCost.style.display = "none";
         monthIncome.style.display = "none";
         yearCost.style.display = "none";
@@ -483,7 +483,7 @@ balance.addEventListener("click", function () {
         net.style.display = "block";
         monthlyNetIncome();
     }
-    if (years.style.backgroundColor === "yellow") {
+    if (years.style.backgroundColor === "pink") {
         yearIncome.style.display = "none";
         monthCost.style.display = "none";
         monthIncome.style.display = "none";
@@ -496,16 +496,16 @@ balance.addEventListener("click", function () {
         yearlyNetIncome();
     }
   } else {
-    this.style.backgroundColor = "yellow";
+    this.style.backgroundColor = "pink";
   }
 });
 
 // 點擊月
 months.addEventListener("click", function () {
   if (this.style.backgroundColor === "") {
-    this.style.backgroundColor = "yellow";
+    this.style.backgroundColor = "pink";
     years.style.backgroundColor = "";
-    if (cost.style.backgroundColor === "yellow") {
+    if (cost.style.backgroundColor === "pink") {
         income.style.backgroundColor = "";
         balance.style.backgroundColor = "";
         monthIncome.style.display = "none";
@@ -519,7 +519,7 @@ months.addEventListener("click", function () {
         totalCost.style.display = "block";
         chooseCostMonthList();
     }
-    if (income.style.backgroundColor === "yellow") {
+    if (income.style.backgroundColor === "pink") {
         cost.style.backgroundColor = "";
         balance.style.backgroundColor = "";
         monthCost.style.display = "none";
@@ -533,7 +533,7 @@ months.addEventListener("click", function () {
         totalIncome.style.display = "block";
         chooseIncomeMonthList();
     }
-    if (balance.style.backgroundColor === "yellow") {
+    if (balance.style.backgroundColor === "pink") {
         cost.style.backgroundColor = "";
         income.style.backgroundColor = "";
         monthCost.style.display = "none";
@@ -548,16 +548,16 @@ months.addEventListener("click", function () {
         monthlyNetIncome();
     }
   } else {
-    this.style.backgroundColor = "yellow";
+    this.style.backgroundColor = "pink";
   }
 });
 
 // 點擊年
 years.addEventListener("click", function () {
   if (this.style.backgroundColor === "") {
-    this.style.backgroundColor = "yellow";
+    this.style.backgroundColor = "pink";
     months.style.backgroundColor = "";
-    if (cost.style.backgroundColor === "yellow") {
+    if (cost.style.backgroundColor === "pink") {
         income.style.backgroundColor = "";
         balance.style.backgroundColor = "";
         monthCost.style.display = "none";
@@ -571,7 +571,7 @@ years.addEventListener("click", function () {
         totalCost.style.display = "block";
         costYearList();
     }
-    if (income.style.backgroundColor === "yellow") {
+    if (income.style.backgroundColor === "pink") {
         cost.style.backgroundColor = "";
         balance.style.backgroundColor = "";
         monthCost.style.display = "none";
@@ -585,7 +585,7 @@ years.addEventListener("click", function () {
         totalIncome.style.display = "block";
         incomeYearList();
     }
-    if (balance.style.backgroundColor === "yellow") {
+    if (balance.style.backgroundColor === "pink") {
         cost.style.backgroundColor = "";
         income.style.backgroundColor = "";
         monthCost.style.display = "none";
@@ -600,6 +600,6 @@ years.addEventListener("click", function () {
         yearlyNetIncome();
     }
   } else {
-    this.style.backgroundColor = "yellow";
+    this.style.backgroundColor = "pink";
   }
 });

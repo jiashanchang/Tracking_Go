@@ -1,18 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-    />
-    <link rel="stylesheet" href="/css/auth.css" />
-    <title>記帳趣 - 註冊</title>
-  </head>
-  <body>
-    {{{body}}}
-  </body>
-  <script type="text/javascript" src="/javascript/signup.js"></script>
-</html>
+<div class="planning">
+  <div class="top">
+    <div class="topTitle">
+      <a href="/"><div class="project-name">
+        <i class="fas fa-book-reader"></i>記帳趣</div></a>
+      <div class="select">
+        <a href="/signin"><div class="signin selection">登入</div></a>
+        <a href="/signup"><div class="signup selection">註冊</div></a>
+      </div>
+    </div>
+  </div>
+
+  <div id="registerForm">
+    <div class="registerTitle">註冊會員帳號</div>
+    <div class="input-group">
+      <input type="text" id="registerName" class="form-control" placeholder="Name" />
+    </div>
+    <div class="registerNameMessage"></div>
+    <div class="input-group">
+      <input type="email" id="registerEmail" class="form-control" placeholder="Email" />
+    </div>
+    <div class="registerEmailMessage"></div>
+    <div class="input-group">
+      <div class="icon"></div>
+      <input type="password" id="registerPassword" class="form-control" placeholder="Password" />
+    </div>
+    <div class="registerPasswordMessage"></div>
+    <div class="button">
+      <button type="submit" id="register">註冊新帳戶</button>
+    </div>
+    <div class="registerBottomMessage"></div>
+    <div id="remind">
+      <div id="alreadyAccount">已經有帳戶了？</div>
+      <a href="/signin"><div id="clickLogin">點此登入</div></a>
+    </div>
+  </div>
+</div>

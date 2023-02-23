@@ -48,25 +48,6 @@
     transform: scale(1.2);
 }
 
-.row {
-    box-sizing: inherit;
-    margin: 20px;
-}
-
-.input-field {
-    position: relative;
-}
-
-input {
-    width: 136px;
-    margin: 5px;
-}
-
-input[placeholder] {
-    padding-left: 0;
-    padding-right: 0;
-}
-
 .costPageNumber, .incomePageNumber, .writeOffPageNumber, .incomeTaxPageNumber {
     display: flex;
     justify-content: center;

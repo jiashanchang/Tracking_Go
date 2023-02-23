@@ -1,97 +1,37 @@
-body {
-    margin: 0;
-}
-
-.gray.darken {
-    background-color: #424242 !important;
-}
-
-nav {
-    color: #fff;
-    background-color: #ee6e73;
-    width: 100%;
-    height: 56px;
-    line-height: 56px;
-}
-
-.contain {
-    margin: 0 auto;
-    max-width: 1280px;
-    width: 80%;
-}
-
-nav .nav-wrapper {
-    position: relative;
-    height: 100%;
-}
-
-nav .brand-logo {
-    position: absolute;
-    color: #fff;
-    display: inline-block;
-    font-size: 2.1rem;
-    padding: 0;
-}
-
-nav .brand-logo.center {
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-    transform: translateX(-50%);
-}
-
-.center, .center-align {
-    text-align: center;
-}
-
-nav .sidenav-trigger {
-    font-size: 30px;
-    float: left;
-    position: relative;
-    z-index: 1;
-    height: 56px;
-    margin: 0 18px;
-    cursor: pointer;
-}
-
-nav a.sidenav-trigger, nav a.sidenav-trigger i {
-    height: 64px;
-    line-height: 64px;
-}
-
-.sidebar{
-    font-size: 20px;
-    width: 25vw;
-    height: 100vh;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.6);
-    box-shadow: -5px 5px 5px rgb(218, 214, 214, 0.5);
-    z-index: 2;
-    text-align: center;
+label {
     display: none;
 }
 
-a {
-    text-decoration: none;
+.sidenav-trigger {
+    height: 30px;
+    width: 30px;
+    right: 0;
+    top: 10px;
+    margin-top: 0;
+    padding: 10px;
+    position: absolute;
+    text-align: right;
+    display: none;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
+.menu {
+    display: flex;
+    justify-self: end;
 }
 
-ul li {
-    padding-top: 40px;
+.topic-choice {
+    font-size: 16px;
+    line-height: 54px;
+    cursor: pointer;
+    margin-right: 15px;
+    color: #072A40;
     font-weight: bold;
 }
 
-ul li a {
-    color: #fff;
-}
-
-ul li:hover {
-    text-shadow: 0 0 0.2em #8F7;
+.open-menu {
+    display: none;
+    position: fixed;
+    justify-self: end;
 }
 
 #warnForm {
@@ -108,7 +48,7 @@ ul li:hover {
 }
 
 #cover {
-    background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+    background: linear-gradient(270deg, #072A40 0%, #178CA4 100%);
     background-size: 340px 10px;;
     background-repeat: no-repeat;
     border-radius: 6px;
@@ -122,16 +62,69 @@ ul li:hover {
     font-size: 16px;
 }
 
-#signout {
+.contain {
+    display: grid;
+    grid-template-columns: minmax(360px,1200px);
+    margin-top: 91px;
+    justify-content: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+.block {
+    margin: auto;
+}
+
+.create {
+    font-size: 20px;
+    text-align: left;
+    font-weight: bold;
+    margin: 20px;
+}
+
+.row {
+    margin: 20px;
+    text-align: left;
+}
+
+.input-field {
+    position: relative;
+}
+
+select {
+    font-family: "Papyrus";
     cursor: pointer;
+    width: 150px;
+    height: 30px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #F9F7F0;
+    border: 1px #072A40 solid;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+input {
+    width: 150px;
+    height: 30px;
+}
+
+input[type] {
+    font-family: "Papyrus";
+    font-weight: bold;
+    text-align: center;
+    border: 1px #072A40 solid;
+    border-radius: 5px;
+    margin-left: 10px;
 }
 
 .btn {
+    width: 60px;
     text-decoration: none;
     color: #fff;
-    background-color: #26a69a;
-    text-align: center;
-    letter-spacing: .5px;
+    background-color: #18B7B1;
     cursor: pointer;
     border: none;
     border-radius: 2px;
@@ -139,8 +132,7 @@ ul li:hover {
     height: 36px;
     line-height: 36px;
     padding: 0 16px;
-    text-transform: uppercase;
-    vertical-align: middle;
+    text-align: center;
 }
 
 .btn:hover {
@@ -150,4 +142,41 @@ ul li:hover {
 
 .red.darken {
     background-color: #E53935 !important;
+}
+
+.right {
+    float: right;
+}
+
+@media (max-width: 800px) {
+    label {
+        display: block;
+    }
+    .sidenav-trigger {
+        display: block;
+    }
+    .menu {
+        display: none;
+    }
+    .topic-choice {
+        color: #FFFFFF;
+        height: 40px;
+        margin-right: 0;
+    }
+    .open-menu {
+        display: none;
+        flex-direction: column;
+        font-size: 20px;
+        width: 50%;
+        height: 130vh;
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+        box-shadow: -5px 5px 5px rgb(218, 214, 214, 0.5);
+        z-index: 2;
+        text-align: center;
+        gap: 20px;
+        align-items: center;
+    }
 }

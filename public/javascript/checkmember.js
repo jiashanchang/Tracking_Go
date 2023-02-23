@@ -28,13 +28,14 @@ signout.addEventListener("click", () => {
 });
 
 // 漢堡選單
-const sidebar = document.querySelector(".sidebar");
+const openMenu = document.querySelector(".open-menu");
 const sidenav_trigger = document.querySelector(".sidenav-trigger");
-sidenav_trigger.addEventListener("click", (event) => {
-  sidebar.style.display = "block";
-  event.stopPropagation();
+window.addEventListener("click", function (event) {
+  if (event.target === sidenav_trigger) {
+    openMenu.style.display = "flex";
+  } else if (event.target === openMenu) {
+    openMenu.style.display = "flex";
+  } else {
+    openMenu.style.display = "none";
+  }
 });
-
-document.onclick = function () {
-  sidebar.style.display = "none";
-};
