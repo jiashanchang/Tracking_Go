@@ -1,3 +1,80 @@
+const costDetail = document.querySelector(".cost-detail");
+const incomeDetail = document.querySelector(".income-detail");
+const writeoffDetail = document.querySelector(".writeoff-detail");
+const taxDetail = document.querySelector(".tax-detail");
+
+const costListField = document.querySelector(".cost-list-field");
+const incomeListField = document.querySelector(".income-list-field");
+const writeoffListField = document.querySelector(".writeoff-list-field");
+const taxListField = document.querySelector(".tax-list-field");
+
+window.onload = function () {
+  costDetail.style.backgroundColor = "pink";
+  incomeListField.style.display = "none";
+  writeoffListField.style.display = "none";
+  taxListField.style.display = "none";
+};
+
+costDetail.addEventListener("click", function () {
+  if (this.style.backgroundColor === "") {
+    this.style.backgroundColor = "pink";
+    incomeDetail.style.backgroundColor = "";
+    writeoffDetail.style.backgroundColor = "";
+    taxDetail.style.backgroundColor = "";
+    incomeListField.style.display = "none";
+    writeoffListField.style.display = "none";
+    taxListField.style.display = "none";
+    costListField.style.display = "grid";
+  } else {
+    this.style.backgroundColor = "pink";
+  }
+});
+
+incomeDetail.addEventListener("click", function () {
+  if (this.style.backgroundColor === "") {
+    this.style.backgroundColor = "pink";
+    costDetail.style.backgroundColor = "";
+    writeoffDetail.style.backgroundColor = "";
+    taxDetail.style.backgroundColor = "";
+    writeoffListField.style.display = "none";
+    taxListField.style.display = "none";
+    costListField.style.display = "none";
+    incomeListField.style.display = "grid";
+  } else {
+    this.style.backgroundColor = "pink";
+  }
+});
+
+writeoffDetail.addEventListener("click", function () {
+  if (this.style.backgroundColor === "") {
+    this.style.backgroundColor = "pink";
+    costDetail.style.backgroundColor = "";
+    incomeDetail.style.backgroundColor = "";
+    taxDetail.style.backgroundColor = "";
+    incomeListField.style.display = "none";
+    taxListField.style.display = "none";
+    costListField.style.display = "none";
+    writeoffListField.style.display = "grid";
+  } else {
+    this.style.backgroundColor = "pink";
+  }
+});
+
+taxDetail.addEventListener("click", function () {
+  if (this.style.backgroundColor === "") {
+    this.style.backgroundColor = "pink";
+    costDetail.style.backgroundColor = "";
+    incomeDetail.style.backgroundColor = "";
+    writeoffDetail.style.backgroundColor = "";
+    incomeListField.style.display = "none";
+    writeoffListField.style.display = "none";
+    costListField.style.display = "none";
+    taxListField.style.display = "grid";
+  } else {
+    this.style.backgroundColor = "pink";
+  }
+});
+
 const daysOfWeek = [
   "星期日",
   "星期一",
@@ -13,7 +90,7 @@ let index = 1;
 // 取得支出紀錄
 const costRecordList = document.querySelector(".costRecordList");
 async function costList() {
-  let response = await fetch("/property/api/cost/record", {
+  let response = await fetch(`/api/cost_records`, {
     method: "GET",
   });
   let records = await response.json();
@@ -23,7 +100,7 @@ async function costList() {
 
 costList().then((records) => {
   const pageNumber = document.querySelector(".costPageNumber");
-  const buttonNumber = Math.ceil(records.length / 8);
+  const buttonNumber = Math.ceil(records.length / 52);
   let str = "";
   for (let j = 0; j < buttonNumber; j++) {
     str += `<span>${j + 1}</span>`;
@@ -41,7 +118,7 @@ costList().then((records) => {
 });
 
 function costPage(page, data) {
-  const onePage = 8;
+  const onePage = 52;
   const startPage = (page - 1) * onePage;
   const endPage = page * onePage;
   let str = "";
@@ -57,12 +134,28 @@ function costPage(page, data) {
     <span class="category">${data[i].categoryId.category}</span>
     <span class="pay">${data[i].payId.category}</span>
     <span class="amount">$ ${data[i].amount.toLocaleString()}</span>
-    <span class="remark">${data[i].remark}</span>
+    <div class="remark">${data[i].remark}</div>
     <a href="property/editcost/${data[i]._id}"><img src="/images/icon_pencil.jpg" class="updateImg"></a>   
     <img id=${data[i]._id} class="deleteCostImg" src="/images/icon_trash-bin.jpg" />
     </div>`;
   }
   document.querySelector(".costRecordList").innerHTML = str;
+
+  const allCostButton = document.querySelectorAll(".costPageNumber span");
+  allCostButton.forEach((button, index) => {
+    if (index === page - 1) {
+      button.classList.add("active");
+    } else {
+      button.classList.remove("active");
+    }
+  });
+
+  allCostButton.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      costPage(index + 1, data);
+    });
+  });
+
   document.querySelectorAll(".deleteCostImg").forEach((record) => {
     record.addEventListener("click", (event) => {
       const costRecordId = event.target.id;
@@ -73,7 +166,7 @@ function costPage(page, data) {
 
 // 刪除支出紀錄
 async function deleteCostRecord(Id) {
-  let url = `property/cost/${Id}`;
+  let url = `/api/cost_records/${Id}`;
   let response = await fetch(url, {
     method: "DELETE",
   });
@@ -86,7 +179,7 @@ async function deleteCostRecord(Id) {
 // 取得收入紀錄
 const incomeRecordList = document.querySelector(".incomeRecordList");
 async function incomeList() {
-  let response = await fetch("/property/api/income/record", {
+  let response = await fetch(`/api/income_records`, {
     method: "GET",
   });
   let records = await response.json();
@@ -96,7 +189,7 @@ async function incomeList() {
 
 incomeList().then((records) => {
   const pageNumber = document.querySelector(".incomePageNumber");
-  const buttonNumber = Math.ceil(records.length / 8);
+  const buttonNumber = Math.ceil(records.length / 52);
   let str = "";
   for (let j = 0; j < buttonNumber; j++) {
     str += `<span>${j + 1}</span>`;
@@ -113,7 +206,7 @@ incomeList().then((records) => {
 });
 
 function incomePage(page, data) {
-  const onePage = 8;
+  const onePage = 52;
   const startPage = (page - 1) * onePage;
   const endPage = page * onePage;
   let str = "";
@@ -129,12 +222,28 @@ function incomePage(page, data) {
     <span class="category">${data[i].categoryId.category}</span>
     <span class="receive">${data[i].receiveId.category}</span>
     <span class="amount">$ ${data[i].amount.toLocaleString()}</span>
-    <span class="remark">${data[i].remark}</span>
+    <div class="remark">${data[i].remark}</div>
     <a href="property/editincome/${data[i]._id}"><img src="/images/icon_pencil.jpg" class="updateImg"></a>   
     <img id=${data[i]._id} class="deleteIncomeImg" src="/images/icon_trash-bin.jpg" />
     </div>`;
   }
   document.querySelector(".incomeRecordList").innerHTML = str;
+
+  const allIncomeButton = document.querySelectorAll(".incomePageNumber span");
+  allIncomeButton.forEach((button, index) => {
+    if (index === page - 1) {
+      button.classList.add("active");
+    } else {
+      button.classList.remove("active");
+    }
+  });
+
+  allIncomeButton.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      incomePage(index + 1, data);
+    });
+  });
+
   document.querySelectorAll(".deleteIncomeImg").forEach((record) => {
     record.addEventListener("click", (event) => {
       const incomeRecordId = event.target.id;
@@ -145,7 +254,7 @@ function incomePage(page, data) {
 
 // 刪除收入紀錄
 async function deleteIncomeRecord(Id) {
-  let url = `property/income/${Id}`;
+  let url = `/api/income_records/${Id}`;
   let response = await fetch(url, {
     method: "DELETE",
   });
@@ -158,7 +267,7 @@ async function deleteIncomeRecord(Id) {
 // 取得沖帳紀錄
 const writeOffRecordList = document.querySelector(".writeOffRecordList");
 async function writeOffList() {
-  let response = await fetch("/property/api/writeoff/record", {
+  let response = await fetch(`/api/writeoff_records`, {
     method: "GET",
   });
   let records = await response.json();
@@ -168,7 +277,7 @@ async function writeOffList() {
 
 writeOffList().then((records) => {
   const pageNumber = document.querySelector(".writeOffPageNumber");
-  const buttonNumber = Math.ceil(records.length / 8);
+  const buttonNumber = Math.ceil(records.length / 52);
   let str = "";
   for (let j = 0; j < buttonNumber; j++) {
     str += `<span>${j + 1}</span>`;
@@ -186,7 +295,7 @@ writeOffList().then((records) => {
 });
 
 function writeOffPage(page, data) {
-  const onePage = 8;
+  const onePage = 52;
   const startPage = (page - 1) * onePage;
   const endPage = page * onePage;
   let str = "";
@@ -202,12 +311,28 @@ function writeOffPage(page, data) {
     <span class="payId">${data[i].payId.category}</span>
     <span class="receiveId">${data[i].receiveId.category}</span>
     <span class="amount">$ ${data[i].amount.toLocaleString()}</span>
-    <span class="remark">${data[i].remark}</span>
+    <div class="remark">${data[i].remark}</div>
     <a href="property/editwriteoff/${data[i]._id}"><img src="/images/icon_pencil.jpg" class="updateImg"></a>   
     <img id=${data[i]._id} class="deleteWriteOffImg" src="/images/icon_trash-bin.jpg" />
     </div>`;
   }
   document.querySelector(".writeOffRecordList").innerHTML = str;
+
+  const allWriteOffButton = document.querySelectorAll(".writeOffPageNumber span");
+  allWriteOffButton.forEach((button, index) => {
+    if (index === page - 1) {
+      button.classList.add("active");
+    } else {
+      button.classList.remove("active");
+    }
+  });
+
+  allWriteOffButton.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      writeOffPage(index + 1, data);
+    });
+  });
+
   document.querySelectorAll(".deleteWriteOffImg").forEach((record) => {
     record.addEventListener("click", (event) => {
       const writeOffRecordId = event.target.id;
@@ -218,7 +343,7 @@ function writeOffPage(page, data) {
 
 // 刪除沖帳紀錄
 async function deleteWriteOffRecord(Id) {
-  let url = `property/writeoff/${Id}`;
+  let url = `/api/writeoff_records/${Id}`;
   let response = await fetch(url, {
     method: "DELETE",
   });
@@ -231,7 +356,7 @@ async function deleteWriteOffRecord(Id) {
 // 取得所得稅紀錄
 const incomeTaxRecordList = document.querySelector(".incomeTaxRecordList");
 async function taxList() {
-  let response = await fetch("/property/api/incometax/record", {
+  let response = await fetch(`/api/tax_records`, {
     method: "GET",
   });
   let records = await response.json();
@@ -241,7 +366,7 @@ async function taxList() {
 
 taxList().then((records) => {
   const pageNumber = document.querySelector(".incomeTaxPageNumber");
-  const buttonNumber = Math.ceil(records.length / 8);
+  const buttonNumber = Math.ceil(records.length / 52);
   let str = "";
   for (let j = 0; j < buttonNumber; j++) {
     str += `<span>${j + 1}</span>`;
@@ -259,7 +384,7 @@ taxList().then((records) => {
 });
 
 function taxPage(page, data) {
-  const onePage = 8;
+  const onePage = 52;
   const startPage = (page - 1) * onePage;
   const endPage = page * onePage;
   let str = "";
@@ -275,12 +400,28 @@ function taxPage(page, data) {
     <span class="income-tax">${data[i].incomeTax}</span>
     <span class="pay">${data[i].taxPayId.category}</span>
     <span class="amount">$ ${data[i].amount.toLocaleString()}</span>
-    <span class="remark">${data[i].remark}</span>
+    <div class="remark">${data[i].remark}</div>
     <a href="property/editincometax/${data[i]._id}"><img src="/images/icon_pencil.jpg" class="updateImg"></a>   
     <img id=${data[i]._id} class="deleteTaxImg" src="/images/icon_trash-bin.jpg" />
     </div>`;
   }
   incomeTaxRecordList.innerHTML = str;
+
+  const allTaxButton = document.querySelectorAll(".incomeTaxPageNumber span");
+  allTaxButton.forEach((button, index) => {
+    if (index === page - 1) {
+      button.classList.add("active");
+    } else {
+      button.classList.remove("active");
+    }
+  });
+
+  allTaxButton.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      taxPage(index + 1, data);
+    });
+  });
+
   document.querySelectorAll(".deleteTaxImg").forEach((record) => {
     record.addEventListener("click", (event) => {
       const taxRecordId = event.target.id;
@@ -291,7 +432,7 @@ function taxPage(page, data) {
 
 // 刪除所得稅紀錄
 async function deleteTaxRecord(Id) {
-  let url = `property/incometax/${Id}`;
+  let url = `/api/tax_records/${Id}`;
   let response = await fetch(url, {
     method: "DELETE",
   });

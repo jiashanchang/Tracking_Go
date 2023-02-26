@@ -71,7 +71,7 @@ login.addEventListener("click", () => {
     }, 2000);
     return;
   }
-  fetch("/api/auth/signin", {
+  fetch("/api/member/signin", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

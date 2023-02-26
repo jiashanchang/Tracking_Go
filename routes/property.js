@@ -15,46 +15,28 @@ dotenv.config();
 
 router.use(bodyParser.json());
 
-router.get("/", (req, res) => {
+router.get("/property", (req, res) => {
   res.render("property");
 });
 
-router.get("/records/addcost", (req, res) => {
+router.get("/property/records/addcost", (req, res) => {
   res.render("records/addcost");
 });
 
-router.get("/records/addincome", (req, res) => {
+router.get("/property/records/addincome", (req, res) => {
   res.render("records/addincome");
 });
 
-router.get("/records/addwriteoff", (req, res) => {
+router.get("/property/records/addwriteoff", (req, res) => {
   res.render("records/addwriteoff");
 });
 
-router.get("/records/addincometax", (req, res) => {
+router.get("/property/records/addincometax", (req, res) => {
   res.render("records/addincometax");
 });
 
-// 支出分類選單
-router.get("/api/costcategories", async (req, res) => {
-  const data = await costCategory.find();
-  return res.json({ ok: true, data: data });
-});
-
-// 收入分類選單
-router.get("/api/incomecategories", async (req, res) => {
-  const data = await incomeCategory.find();
-  return res.json({ ok: true, data: data });
-});
-
-// 資產負債分類選單
-router.get("/api/asset-and-liability-categories", async (req, res) => {
-  const data = await assetLiabilityCategory.find();
-  return res.json({ ok: true, data: data });
-});
-
 // 取得支出紀錄
-router.get("/api/cost/record", async (req, res) => {
+router.get("/api/cost_records", async (req, res) => {
   try {
     const cookies = req.cookies.token;
     if (!cookies) {
@@ -83,7 +65,7 @@ router.get("/api/cost/record", async (req, res) => {
 });
 
 // 取得收入紀錄
-router.get("/api/income/record", async (req, res) => {
+router.get("/api/income_records", async (req, res) => {
   try {
     const cookies = await req.cookies.token;
     if (!cookies) {
@@ -112,7 +94,7 @@ router.get("/api/income/record", async (req, res) => {
 });
 
 // 取得沖帳紀錄
-router.get("/api/writeoff/record", async (req, res) => {
+router.get("/api/writeoff_records", async (req, res) => {
   try {
     const cookies = await req.cookies.token;
     if (!cookies) {
@@ -141,7 +123,7 @@ router.get("/api/writeoff/record", async (req, res) => {
 });
 
 // 取得所得稅紀錄
-router.get("/api/incometax/record", async (req, res) => {
+router.get("/api/tax_records", async (req, res) => {
   try {
     const cookies = await req.cookies.token;
     if (!cookies) {
@@ -169,7 +151,7 @@ router.get("/api/incometax/record", async (req, res) => {
 });
 
 // 新增支出紀錄
-router.post("/api/add/costrecord", async (req, res) => {
+router.post("/api/cost_records", async (req, res) => {
   try {
     const cookies = await req.cookies.token;
     if (!cookies) {
@@ -237,7 +219,7 @@ router.post("/api/add/costrecord", async (req, res) => {
 });
 
 // 新增收入紀錄
-router.post("/api/add/incomerecord", async (req, res) => {
+router.post("/api/income_records", async (req, res) => {
   try {
     const cookies = await req.cookies.token;
     if (!cookies) {
@@ -305,7 +287,7 @@ router.post("/api/add/incomerecord", async (req, res) => {
 });
 
 // 新增沖帳紀錄
-router.post("/api/add/write-off-record", async (req, res) => {
+router.post("/api/writeoff_records", async (req, res) => {
   try {
     const cookies = await req.cookies.token;
     if (!cookies) {
@@ -369,7 +351,7 @@ router.post("/api/add/write-off-record", async (req, res) => {
 });
 
 // 新增所得稅紀錄
-router.post("/api/add/income-tax-record", async (req, res) => {
+router.post("/api/tax_records", async (req, res) => {
   try {
     const cookies = await req.cookies.token;
     if (!cookies) {
@@ -420,7 +402,7 @@ router.post("/api/add/income-tax-record", async (req, res) => {
 });
 
 // 取得支出id
-router.get("/cost/:id", async (req, res) => {
+router.get("/api/cost_records/:id", async (req, res) => {
   try {
     const cookies = await req.cookies.token;
     if (!cookies) {
@@ -447,7 +429,7 @@ router.get("/cost/:id", async (req, res) => {
 });
 
 // 取得收入id
-router.get("/income/:id", async (req, res) => {
+router.get("/api/income_records/:id", async (req, res) => {
   try {
     const cookies = await req.cookies.token;
     if (!cookies) {
@@ -474,7 +456,7 @@ router.get("/income/:id", async (req, res) => {
 });
 
 // 取得沖帳id
-router.get("/writeoff/:id", async (req, res) => {
+router.get("/api/writeoff_records/:id", async (req, res) => {
   try {
     const cookies = await req.cookies.token;
     if (!cookies) {
@@ -501,7 +483,7 @@ router.get("/writeoff/:id", async (req, res) => {
 });
 
 // 取得所得稅id
-router.get("/incometax/:id", async (req, res) => {
+router.get("/api/tax_records/:id", async (req, res) => {
   try {
     const cookies = await req.cookies.token;
     if (!cookies) {
@@ -526,8 +508,8 @@ router.get("/incometax/:id", async (req, res) => {
   }
 });
 
-// 選取要更新的支出紀錄id
-router.get("/editcost/:id", async (req, res) => {
+// 網頁支出紀錄id
+router.get("/property/editcost/:id", async (req, res) => {
   try {
     const cookies = await req.cookies.token;
     if (!cookies) {
@@ -555,8 +537,8 @@ router.get("/editcost/:id", async (req, res) => {
   }
 });
 
-// 選取要更新的收入紀錄id
-router.get("/editincome/:id", async (req, res) => {
+// 網頁收入紀錄id
+router.get("/property/editincome/:id", async (req, res) => {
   try {
     const cookies = await req.cookies.token;
     if (!cookies) {
@@ -584,8 +566,8 @@ router.get("/editincome/:id", async (req, res) => {
   }
 });
 
-// 選取要更新的沖帳紀錄id
-router.get("/editwriteoff/:id", async (req, res) => {
+// 網頁沖帳紀錄id
+router.get("/property/editwriteoff/:id", async (req, res) => {
   try {
     const cookies = await req.cookies.token;
     if (!cookies) {
@@ -613,8 +595,8 @@ router.get("/editwriteoff/:id", async (req, res) => {
   }
 });
 
-// 選取要更新的所得稅紀錄id
-router.get("/editincometax/:id", async (req, res) => {
+// 網頁所得稅紀錄id
+router.get("/property/editincometax/:id", async (req, res) => {
   try {
     const cookies = await req.cookies.token;
     if (!cookies) {
@@ -643,7 +625,7 @@ router.get("/editincometax/:id", async (req, res) => {
 });
 
 // 更新支出紀錄
-router.put("/cost/:id", async (req, res) => {
+router.put("/api/cost_records/:id", async (req, res) => {
   try {
     const cookies = await req.cookies.token;
     if (!cookies) {
@@ -700,7 +682,7 @@ router.put("/cost/:id", async (req, res) => {
 });
 
 // 更新收入紀錄
-router.put("/income/:id", async (req, res) => {
+router.put("/api/income_records/:id", async (req, res) => {
   try {
     const cookies = await req.cookies.token;
     if (!cookies) {
@@ -757,7 +739,7 @@ router.put("/income/:id", async (req, res) => {
 });
 
 // 更新沖帳紀錄
-router.put("/writeoff/:id", async (req, res) => {
+router.put("/api/writeoff_records/:id", async (req, res) => {
   try {
     const cookies = await req.cookies.token;
     if (!cookies) {
@@ -814,7 +796,7 @@ router.put("/writeoff/:id", async (req, res) => {
 });
 
 // 更新所得稅紀錄
-router.put("/incometax/:id", async (req, res) => {
+router.put("/api/tax_records/:id", async (req, res) => {
   try {
     const cookies = await req.cookies.token;
     if (!cookies) {
@@ -862,7 +844,7 @@ router.put("/incometax/:id", async (req, res) => {
 });
 
 // 刪除支出
-router.delete("/cost/:id", async (req, res) => {
+router.delete("/api/cost_records/:id", async (req, res) => {
   try {
     const cookies = await req.cookies.token;
     if (!cookies) {
@@ -902,7 +884,7 @@ router.delete("/cost/:id", async (req, res) => {
 });
 
 // 刪除收入
-router.delete("/income/:id", async (req, res) => {
+router.delete("/api/income_records/:id", async (req, res) => {
   try {
     const cookies = await req.cookies.token;
     if (!cookies) {
@@ -942,7 +924,7 @@ router.delete("/income/:id", async (req, res) => {
 });
 
 // 刪除沖帳
-router.delete("/writeoff/:id", async (req, res) => {
+router.delete("/api/writeoff_records/:id", async (req, res) => {
   try {
     const cookies = await req.cookies.token;
     if (!cookies) {
@@ -982,7 +964,7 @@ router.delete("/writeoff/:id", async (req, res) => {
 });
 
 // 刪除所得稅
-router.delete("/incometax/:id", async (req, res) => {
+router.delete("/api/tax_records/:id", async (req, res) => {
   try {
     const cookies = await req.cookies.token;
     if (!cookies) {

@@ -1,6 +1,6 @@
 // 取得借方資產負債分類選單
 async function debitCategories() {
-  let response = await fetch("/property/api/asset-and-liability-categories", {
+  let response = await fetch(`/api/asset_and_liability_categories`, {
     method: "GET",
   });
   let getCategories = await response.json();
@@ -20,7 +20,7 @@ debitCategories();
 
 // 取得貸方資產負債分類選單
 async function creditCategories() {
-  let response = await fetch("/property/api/asset-and-liability-categories", {
+  let response = await fetch(`/api/asset_and_liability_categories`, {
     method: "GET",
   });
   let getCategories = await response.json();
@@ -62,7 +62,7 @@ addWriteOff.addEventListener("click", () => {
   const inputWriteOffDate = document.getElementById("inputWriteOffDate");
   const inputWriteOffAmount = document.getElementById("inputWriteOffAmount");
   const inputWriteOffRemark = document.getElementById("inputWriteOffRemark");
-  fetch("/property/api/add/write-off-record", {
+  fetch(`/api/writeoff_records`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

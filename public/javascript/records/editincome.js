@@ -2,7 +2,7 @@ let url = location.href;
 let id = url.split("/")[5];
 
 async function getIncomeRecordData() {
-  let response = await fetch(`/property/income/${id}`, {
+  let response = await fetch(`/api/income_records/${id}`, {
     method: "GET",
   })
   let incomeData = await response.json();
@@ -17,9 +17,9 @@ async function getIncomeRecordData() {
 
 getIncomeRecordData();
 
-// 取得分類選單
+// 取得收入分類選單
 async function searchCategories() {
-  let response = await fetch("/property/api/incomecategories", {
+  let response = await fetch(`/api/income_categories`, {
     method: "GET",
   });
   let getCategories = await response.json();
@@ -39,7 +39,7 @@ searchCategories();
 
 // 取得資產負債分類選單
 async function assetLiabilityCategories() {
-  let response = await fetch("/property/api/asset-and-liability-categories", {
+  let response = await fetch(`/api/asset_and_liability_categories`, {
     method: "GET",
   });
   let getCategories = await response.json();
@@ -68,7 +68,7 @@ editIncome.addEventListener("click", () => {
   const inputIncomeAmount = document.getElementById("inputIncomeAmount");
   const inputIncomeRemark = document.getElementById("inputIncomeRemark");
   if (inputIncomeAmount.value != "") {
-    fetch(`/property/income/${id}`, {
+    fetch(`/api/income_records/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

@@ -79,7 +79,7 @@ for (let j = 2020; j < 2100; j++) {
 async function getReport() {
     const allYearValue = document.getElementById("allYear").value;
     let response = await fetch(
-        `/financialstatement/api/year/financialstatement?year=${allYearValue}`,
+        `/api/year/financialstatement?year=${allYearValue}`,
         {
             method: "GET",
         }

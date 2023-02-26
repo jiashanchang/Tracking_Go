@@ -1,6 +1,6 @@
 // 取得資產負債分類選單
 async function assetLiabilityCategories() {
-  let response = await fetch("/property/api/asset-and-liability-categories", {
+  let response = await fetch(`/api/asset_and_liability_categories`, {
     method: "GET",
   });
   let getCategories = await response.json();
@@ -32,7 +32,7 @@ if (day < 10) {
 let today = year + "-" + month + "-" + day;
 document.getElementById("inputTaxDate").value = today;
 
-// 新增沖帳
+// 新增所得稅
 const warnForm = document.getElementById("warnForm");
 const warn = document.getElementById("warn");
 const addTax = document.getElementById("addTax");
@@ -42,7 +42,7 @@ addTax.addEventListener("click", () => {
   const inputTaxDate = document.getElementById("inputTaxDate");
   const inputTaxAmount = document.getElementById("inputTaxAmount");
   const inputTaxRemark = document.getElementById("inputTaxRemark");
-  fetch("/property/api/add/income-tax-record", {
+  fetch(`/api/tax_records`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

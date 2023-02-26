@@ -2,7 +2,7 @@ let url = location.href;
 let id = url.split("/")[5];
 
 async function getWriteOffRecordData() {
-  let response = await fetch(`/property/writeoff/${id}`, {
+  let response = await fetch(`/api/writeoff_records/${id}`, {
     method: "GET",
   });
   let writeOffData = await response.json();
@@ -19,7 +19,7 @@ getWriteOffRecordData();
 
 // 取得借方資產負債分類選單
 async function debitCategories() {
-  let response = await fetch("/property/api/asset-and-liability-categories", {
+  let response = await fetch(`/api/asset_and_liability_categories`, {
     method: "GET",
   });
   let getCategories = await response.json();
@@ -39,7 +39,7 @@ debitCategories();
 
 // 取得貸方資產負債分類選單
 async function creditCategories() {
-  let response = await fetch("/property/api/asset-and-liability-categories", {
+  let response = await fetch(`/api/asset_and_liability_categories`, {
     method: "GET",
   });
   let getCategories = await response.json();
@@ -68,7 +68,7 @@ editWriteOff.addEventListener("click", () => {
   const inputWriteOffAmount = document.getElementById("inputWriteOffAmount");
   const inputWriteOffRemark = document.getElementById("inputWriteOffRemark");
   if (inputWriteOffAmount.value != "") {
-    fetch(`/property/writeoff/${id}`, {
+    fetch(`/api/writeoff_records/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

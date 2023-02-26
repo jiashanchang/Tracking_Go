@@ -6,7 +6,7 @@
 }
 
 .months, .years {
-    width: 640px;
+    width: 50%;
     margin: auto;
     text-align: center;
     cursor: pointer;
@@ -24,7 +24,7 @@
 }
 
 .cost, .income, .balance {
-    width: 426px;
+    width: 33.33%;
     border-radius: 5px;
     margin: auto;
     text-align: center;
@@ -41,7 +41,31 @@
     font-weight: bold;
 }
 
+.dispaly-detail-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.eachDetail {
+    margin: 20px;
+}
+
 #allchart {
     width: 300px;
     margin: auto;
 }
+
+@media (max-width: 700px) {
+    .dispaly-detail-list {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 0px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .detailList {
+        margin-bottom: 20px;
+    }
+  }

@@ -13,7 +13,7 @@ dotenv.config();
 
 router.use(bodyParser.json());
 
-router.get("/", (req, res) => {
+router.get("/financialstatement", (req, res) => {
   res.render("financialstatement");
 });
 

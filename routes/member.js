@@ -57,7 +57,7 @@ router.get("/api/member", async (req, res) => {
 });
 
 // 登入
-router.post("/api/auth/signin", async (req, res) => {
+router.post("/api/member/signin", async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await Member.findOne({ email }).lean();
@@ -97,9 +97,8 @@ router.post("/api/auth/signin", async (req, res) => {
 });
 
 // 註冊
-router.post("/api/auth/signup", async (req, res) => {
+router.post("/api/member/signup", async (req, res) => {
   try {
-    let nameRule = /^[\u4e00-\u9fa5_a-zA-Z0-9_]{5,8}$/;
     let emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
     let passwordRule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
     let { name, email, password } = req.body;
@@ -108,11 +107,6 @@ router.post("/api/auth/signup", async (req, res) => {
       return res.json({
         error: true,
         message: "請輸入姓名、信箱或密碼",
-      });
-    } else if (!nameRule.test(name)) {
-      return res.json({
-        error: true,
-        message: "姓名格式錯誤",
       });
     } else if (!emailRule.test(email)) {
       return res.json({
@@ -150,7 +144,7 @@ router.post("/api/auth/signup", async (req, res) => {
 });
 
 // 登出
-router.get("/api/auth/signout", (req, res) => {
+router.get("/api/member/signout", (req, res) => {
   res.clearCookie("token");
   return res.json({ ok: true });
 });

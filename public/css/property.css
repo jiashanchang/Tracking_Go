@@ -4,6 +4,34 @@
     text-align: center;
 }
 
+.record-lists {
+    margin: 20px;
+    display: flex;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.all-details {
+    width: 25%;
+    border-radius: 5px;
+    margin: auto;
+    text-align: center;
+    cursor: pointer;
+}
+
+.income-list-field, .writeoff-list-field, .tax-list-field {
+    display: none;
+}
+
+.all-records {
+    display: grid;
+    grid-template-columns: repeat(4, 265px);
+    width: 100%;
+    gap: 30px;
+    margin: 50px auto;
+    justify-content: center;
+}
+
 .icon-record {
     width: 100px;
     padding: 10px;
@@ -18,24 +46,24 @@
 .record {
     border: 1px solid;
     border-radius: 5px;
-    margin: 20px;
 }
 
 .date {
     width: 95%;
     margin: auto;
     border-bottom: 1px solid;
+    font-weight: bold;
 }
 
-.category, .amount, .remark {
-    padding: 10px;
+.category, .amount, .remark, .pay, .receive, .payId, .receiveId, .income-tax {
+    padding: 5px;
     margin: auto;
+    font-weight: bold;
 }
 
 .updateImg, .deleteCostImg, .deleteIncomeImg, .deleteWriteOffImg, .deleteTaxImg {
     width: 30px;
     cursor: pointer;
-    padding: 10px;
 }
 
 .icon-plus {
@@ -51,6 +79,7 @@
 .costPageNumber, .incomePageNumber, .writeOffPageNumber, .incomeTaxPageNumber {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .costPageNumber span, .incomePageNumber span, .writeOffPageNumber span, .incomeTaxPageNumber span {
@@ -66,3 +95,27 @@
     background: #444;
     color: #fff;
 }
+
+.active {
+    background: #444;
+    color: #fff;
+}
+
+@media (max-width: 1200px) {
+    .all-records {
+      grid-template-columns: repeat(3, 270px);
+    }
+  }
+  
+  @media (max-width: 900px) {
+    .all-records {
+      grid-template-columns: repeat(2, 270px);
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .all-records {
+      grid-template-columns: repeat(1, 320px);
+      gap: 15px;
+    }
+  }

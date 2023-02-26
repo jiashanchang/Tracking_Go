@@ -129,7 +129,7 @@ function getDoughnut(categories, amounts, color) {
 // 月支出
 async function costMonthList() {
     const costMonth = document.getElementById("costMonth").value;
-    let response = await fetch(`/financialanalysis/api/monthly/cost?month=${costMonth}`,{
+    let response = await fetch(`/api/monthly/cost?month=${costMonth}`,{
         method: "GET",
     });
     let records = await response.json();
@@ -143,7 +143,7 @@ costMonthList().then((records) => {
     const aggregatedCostData = [];
     for (let i = 0; i < records.data.length; i++) {
         const createDate = records.data[i].createdAt.replace(/-/g, "/");
-        str += `<div><span class="detailcreatedAt">${createDate}</span>
+        str += `<div class="eachDetail"><span class="detailcreatedAt">${createDate}</span>
         <span class="detailCategory">${records.data[i].categoryId.category}</span>
         <span class="detailAmount"> $${records.data[i].amount.toLocaleString()}</span>
         <a href="property/editcost/${records.data[i]._id}"><button class="btn">支出明細</button></a>
@@ -170,7 +170,7 @@ costMonthList().then((records) => {
 // 篩選月支出
 async function chooseCostMonthList() {
     const costMonth = document.getElementById("costMonth").value;
-    let response = await fetch(`/financialanalysis/api/monthly/cost?month=${costMonth}`,{
+    let response = await fetch(`/api/monthly/cost?month=${costMonth}`,{
         method: "GET",
     });
     let records = await response.json();
@@ -182,7 +182,7 @@ async function chooseCostMonthList() {
     const aggregatedCostData = [];
     for (let i = 0; i < records.data.length; i++) {
         const createDate = records.data[i].createdAt.replace(/-/g, "/");
-        str += `<div><span class="detailcreatedAt">${createDate}</span>
+        str += `<div class="eachDetail"><span class="detailcreatedAt">${createDate}</span>
         <span class="detailCategory">${records.data[i].categoryId.category}</span>
         <span class="detailAmount"> $${records.data[i].amount.toLocaleString()}</span>
         <a href="property/editcost/${records.data[i]._id}"><button class="btn">支出明細</button></a>
@@ -212,7 +212,7 @@ submitCostMonth.addEventListener("click", chooseCostMonthList);
 // 篩選月收入
 async function chooseIncomeMonthList() {
     const incomeMonth = document.getElementById("incomeMonth").value;
-    let response = await fetch(`/financialanalysis/api/monthly/income?month=${incomeMonth}`,{
+    let response = await fetch(`/api/monthly/income?month=${incomeMonth}`,{
         method: "GET",
     });
     let records = await response.json();
@@ -224,7 +224,7 @@ async function chooseIncomeMonthList() {
     const aggregatedIncomeData = [];
     for (let i = 0; i < records.data.length; i++) {
         const createDate = records.data[i].createdAt.replace(/-/g, "/");
-        str += `<div><span class="detailcreatedAt">${createDate}</span>
+        str += `<div class="eachDetail"><span class="detailcreatedAt">${createDate}</span>
         <span class="detailCategory">${records.data[i].categoryId.category}</span>
         <span class="detailAmount"> $${records.data[i].amount.toLocaleString()}</span>
         <a href="property/editcost/${records.data[i]._id}"><button class="btn">收入明細</button></a>
@@ -254,7 +254,7 @@ submitIncomeMonth.addEventListener("click", chooseIncomeMonthList);
 // 年支出
 async function costYearList() {
     const selectCostYear = document.getElementById("selectCostYear").value;
-    let response = await fetch(`/financialanalysis/api/yearly/cost?year=${selectCostYear}`,{
+    let response = await fetch(`/api/yearly/cost?year=${selectCostYear}`,{
         method: "GET",
     });
     let records = await response.json();
@@ -265,7 +265,7 @@ async function costYearList() {
     const aggregatedCostData = [];
     for (let i = 0; i < records.data.length; i++) {
         const createDate = records.data[i].createdAt.replace(/-/g, "/");
-        str += `<div><span class="detailcreatedAt">${createDate}</span>
+        str += `<div class="eachDetail"><span class="detailcreatedAt">${createDate}</span>
         <span class="detailCategory">${records.data[i].categoryId.category}</span>
         <span class="detailAmount"> $${records.data[i].amount.toLocaleString()}</span>
         <a href="property/editcost/${records.data[i]._id}"><button class="btn">支出明細</button></a>
@@ -295,7 +295,7 @@ submitCostYear.addEventListener("click", costYearList);
 // 年收入
 async function incomeYearList() {
     const selectIncomeYear = document.getElementById("selectIncomeYear").value;
-    let response = await fetch(`/financialanalysis/api/yearly/income?year=${selectIncomeYear}`,{
+    let response = await fetch(`/api/yearly/income?year=${selectIncomeYear}`,{
         method: "GET",
     });
     let records = await response.json();
@@ -306,7 +306,7 @@ async function incomeYearList() {
     const aggregatedIncomeData = [];
     for (let i = 0; i < records.data.length; i++) {
         const createDate = records.data[i].createdAt.replace(/-/g, "/");
-        str += `<div><span class="detailcreatedAt">${createDate}</span>
+        str += `<div class="eachDetail"><span class="detailcreatedAt">${createDate}</span>
         <span class="detailCategory">${records.data[i].categoryId.category}</span>
         <span class="detailAmount"> $${records.data[i].amount.toLocaleString()}</span>
         <a href="property/editcost/${records.data[i]._id}"><button class="btn">收入明細</button></a>
@@ -337,7 +337,7 @@ submitIncomeYear.addEventListener("click", incomeYearList);
 // 月結餘
 async function monthlyNetIncome() {
     const netMonth = document.getElementById("netMonth").value;
-    let response = await fetch(`/financialanalysis/api/monthly/net?month=${netMonth}`,{
+    let response = await fetch(`/api/monthly/net?month=${netMonth}`,{
         method: "GET",
     });
     let records = await response.json();
@@ -351,6 +351,22 @@ async function monthlyNetIncome() {
     for (let i = 0; i < records.data.incomeAmountList.length; i++) {
         incomeSum += records.data.incomeAmountList[i].amount;
     }
+
+    const incomeDiv = document.createElement("div");
+    incomeDiv.className = "eachDetail";
+    const incomeName = document.createTextNode("總收入");
+    const monthTotalIncome = document.createTextNode("$" + incomeSum);
+    detailList.appendChild(incomeDiv);
+    incomeDiv.appendChild(incomeName);
+    incomeDiv.appendChild(monthTotalIncome);
+
+    const costDiv = document.createElement("div");
+    costDiv.className = "eachDetail";
+    const costName = document.createTextNode("總支出");
+    const monthTotalCost = document.createTextNode("$" + costSum);
+    detailList.appendChild(costDiv);
+    costDiv.appendChild(costName);
+    costDiv.appendChild(monthTotalCost);
 
     const netAmount = incomeSum - costSum;
     const formattedDate = netMonth.replace("-", "年");
@@ -368,7 +384,7 @@ submitNetMonth.addEventListener("click", monthlyNetIncome);
 // 年結餘
 async function yearlyNetIncome() {
     const selectNetYear = document.getElementById("selectNetYear").value;
-    let response = await fetch(`/financialanalysis/api/yearly/net?year=${selectNetYear}`,{
+    let response = await fetch(`/api/yearly/net?year=${selectNetYear}`,{
         method: "GET",
     });
     let records = await response.json();
@@ -382,6 +398,22 @@ async function yearlyNetIncome() {
     for (let i = 0; i < records.data.incomeAmountList.length; i++) {
         incomeSum += records.data.incomeAmountList[i].amount;
     }
+
+    const incomeDiv = document.createElement("div");
+    incomeDiv.className = "eachDetail";
+    const incomeName = document.createTextNode("總收入");
+    const monthTotalIncome = document.createTextNode("$" + incomeSum);
+    detailList.appendChild(incomeDiv);
+    incomeDiv.appendChild(incomeName);
+    incomeDiv.appendChild(monthTotalIncome);
+
+    const costDiv = document.createElement("div");
+    costDiv.className = "eachDetail";
+    const costName = document.createTextNode("總支出");
+    const monthTotalCost = document.createTextNode("$" + costSum);
+    detailList.appendChild(costDiv);
+    costDiv.appendChild(costName);
+    costDiv.appendChild(monthTotalCost);
 
     const netAmount = incomeSum - costSum;
     net.textContent = selectNetYear + "結餘 $" + netAmount.toLocaleString();

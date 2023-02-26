@@ -2,7 +2,7 @@ let url = location.href;
 let id = url.split("/")[5];
 
 async function getCostRecordData() {
-  let response = await fetch(`/property/cost/${id}`, {
+  let response = await fetch(`/api/cost_records/${id}`, {
     method: "GET",
   })
   let costData = await response.json();
@@ -17,9 +17,9 @@ async function getCostRecordData() {
 
 getCostRecordData();
 
-// 取得分類選單
+// 取得支出分類選單
 async function searchCategories() {
-  let response = await fetch("/property/api/costcategories", {
+  let response = await fetch(`/api/cost_categories`, {
     method: "GET",
   });
   let getCategories = await response.json();
@@ -39,7 +39,7 @@ searchCategories();
 
 // 取得資產負債分類選單
 async function assetLiabilityCategories() {
-  let response = await fetch("/property/api/asset-and-liability-categories", {
+  let response = await fetch(`/api/asset_and_liability_categories`, {
     method: "GET",
   });
   let getCategories = await response.json();
@@ -68,7 +68,7 @@ editCost.addEventListener("click", () => {
   const inputCostAmount = document.getElementById("inputCostAmount");
   const inputCostRemark = document.getElementById("inputCostRemark");
   if (inputCostAmount.value != "") {
-    fetch(`/property/cost/${id}`, {
+    fetch(`/api/cost_records/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

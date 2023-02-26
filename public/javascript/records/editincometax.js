@@ -2,7 +2,7 @@ let url = location.href;
 let id = url.split("/")[5];
 
 async function getWriteOffRecordData() {
-  let response = await fetch(`/property/incometax/${id}`, {
+  let response = await fetch(`/api/tax_records/${id}`, {
     method: "GET",
   });
   let taxData = await response.json();
@@ -19,7 +19,7 @@ getWriteOffRecordData();
 
 // 取得資產負債分類選單
 async function assetLiabilityCategories() {
-  let response = await fetch("/property/api/asset-and-liability-categories", {
+  let response = await fetch(`/api/asset_and_liability_categories`, {
     method: "GET",
   });
   let getCategories = await response.json();
@@ -48,7 +48,7 @@ editTax.addEventListener("click", () => {
   const inputTaxAmount = document.getElementById("inputTaxAmount");
   const inputTaxRemark = document.getElementById("inputTaxRemark");
   if (inputTaxAmount.value != "") {
-    fetch(`/property/incometax/${id}`, {
+    fetch(`/api/tax_records/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

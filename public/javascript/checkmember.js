@@ -14,7 +14,22 @@ checkMember();
 // 登出流程
 const signout = document.getElementById("signout");
 signout.addEventListener("click", () => {
-  fetch("/api/auth/signout", {
+  fetch("/api/member/signout", {
+    method: "GET",
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (memberLogout) {
+      if (memberLogout.ok) {
+        window.location.reload();
+      }
+    });
+});
+
+const logout = document.getElementById("logout");
+logout.addEventListener("click", () => {
+  fetch("/api/member/signout", {
     method: "GET",
   })
     .then(function (response) {

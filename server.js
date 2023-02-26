@@ -26,15 +26,15 @@ app.use(express.static(path.join(__dirname, "public")));
 
 const indexRouter = require("./routes/member");
 const propertyRouter = require("./routes/property");
-const membercenterRouter = require("./routes/membercenter");
+const categorymanagementRouter = require("./routes/categorymanagement");
 const financialAnalysisRouter = require("./routes/financialanalysis");
 const financialstatementRouter = require("./routes/financialstatement");
 
 app.use("/", indexRouter);
-app.use("/property", propertyRouter);
-app.use("/membercenter", membercenterRouter);
-app.use("/financialanalysis", financialAnalysisRouter);
-app.use("/financialstatement", financialstatementRouter);
+app.use("/", propertyRouter);
+app.use("/", categorymanagementRouter);
+app.use("/", financialAnalysisRouter);
+app.use("/", financialstatementRouter);
 
 app.use((req, res) => {
   res.render("errorpage");

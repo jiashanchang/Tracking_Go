@@ -1,6 +1,6 @@
-// 取得分類選單
+// 取得支出分類選單
 async function searchCategories() {
-  let response = await fetch("/property/api/costcategories", {
+  let response = await fetch(`/api/cost_categories`, {
     method: "GET",
   });
   let getCategories = await response.json();
@@ -20,7 +20,7 @@ searchCategories();
 
 // 取得資產負債分類選單
 async function assetLiabilityCategories() {
-  let response = await fetch("/property/api/asset-and-liability-categories", {
+  let response = await fetch(`/api/asset_and_liability_categories`, {
     method: "GET",
   });
   let getCategories = await response.json();
@@ -62,7 +62,7 @@ addCost.addEventListener("click", () => {
   const inputCostDate = document.getElementById("inputCostDate");
   const inputCostAmount = document.getElementById("inputCostAmount");
   const inputCostRemark = document.getElementById("inputCostRemark");
-  fetch("/property/api/add/costrecord", {
+  fetch(`/api/cost_records`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

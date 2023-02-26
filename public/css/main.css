@@ -49,7 +49,7 @@ label {
 
 #cover {
     background: linear-gradient(270deg, #072A40 0%, #178CA4 100%);
-    background-size: 340px 10px;;
+    background-size: 340px 10px;
     background-repeat: no-repeat;
     border-radius: 6px;
 }

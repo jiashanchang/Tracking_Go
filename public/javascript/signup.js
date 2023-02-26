@@ -15,7 +15,6 @@ async function isMember() {
 
 isMember();
 
-
 const registerName = document.getElementById("registerName");
 const registerEmail = document.getElementById("registerEmail");
 const registerPassword = document.getElementById("registerPassword");
@@ -25,7 +24,6 @@ const registerEmailMessage = document.querySelector(".registerEmailMessage");
 const registerPasswordMessage = document.querySelector(".registerPasswordMessage");
 const registerBottomMessage = document.querySelector(".registerBottomMessage");
 
-let nameRule = /^[\u4e00-\u9fa5_a-zA-Z0-9_]{5,8}$/;
 let emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
 let passwordRule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
@@ -38,10 +36,6 @@ registerName.addEventListener("input", () => {
   if (registerName.value == "") {
     registerNameMessage.style.display = "block";
     registerNameMessage.textContent = "⚠ 請輸入姓名";
-    checkNameInputValue = false;
-  } else if (!nameRule.test(registerName.value)) {
-    registerNameMessage.style.display = "block";
-    registerNameMessage.textContent = "⚠ 須介於 5-8 字元，可包含中、英文字母、數字或下底線";
     checkNameInputValue = false;
   } else {
     registerNameMessage.style.display = "none";
@@ -91,7 +85,7 @@ register.addEventListener("click", () => {
     }, 2000);
     return;
   }
-  fetch("/api/auth/signup", {
+  fetch("/api/member/signup", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
