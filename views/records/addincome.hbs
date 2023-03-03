@@ -1,0 +1,35 @@
+<div class="block">
+  <div class="create">新增收入明細</div>
+  <div class="row">
+    <div class="input-field">
+      收款項目：<select id="categoriesList"></select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field">收款方式：<select id="receive"></select></div>
+  </div>
+  <div class="row">
+    <div class="input-field">
+      收款日期：<input type="date" placeholder="日期" id="inputIncomeDate" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field">
+      收款金額：<input type="text" placeholder="金額" id="inputIncomeAmount" onkeyup="this.value=this.value.replace(/\D/g,'').replace(/^0{1,}/g,'')" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field">
+      備註：<input type="text" placeholder="備註" id="inputIncomeRemark" />
+    </div>
+  </div>
+
+  <div class="row">
+    <button id="addIncome" class="btn red darken">新增</button>
+    <a href="/property/income-list"><button class="btn right">取消</button></a>
+  </div>
+</div>
+
+<script type="text/javascript" src="/javascript/records/addincome.js"></script>

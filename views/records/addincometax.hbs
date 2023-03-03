@@ -1,0 +1,41 @@
+<div class="block">
+  <div class="create">新增所得稅明細</div>
+  <div class="row">
+    <div class="input-field">
+      所得稅：<select id="income-tax">
+        <option>所得稅費用</option>
+        <option>所得稅利益</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field">
+      收款/支付方式：<select id="taxPay"></select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field">
+      收款/支付日期：<input type="date" placeholder="日期" id="inputTaxDate" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field">
+      收款/支付金額：<input type="text" placeholder="金額" id="inputTaxAmount" onkeyup="this.value=this.value.replace(/\D/g,'').replace(/^0{1,}/g,'')" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field">
+      備註：<input type="text" placeholder="備註" id="inputTaxRemark" />
+    </div>
+  </div>
+
+  <div class="row">
+    <button id="addTax" class="btn red darken">新增</button>
+    <a href="/property/incometax-list"><button class="btn right">取消</button></a>
+  </div>
+</div>
+
+<script type="text/javascript" src="/javascript/records/addincometax.js"></script>

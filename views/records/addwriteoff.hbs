@@ -1,0 +1,38 @@
+<div class="block">
+  <div class="create">新增沖銷明細</div>
+  <div class="row">
+    <div class="input-field">
+      新增資產/減少負債：<select id="debitCategory"></select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field">
+      減少資產/新增負債：<select id="creditCategory"></select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field">
+      轉帳/沖帳日期：<input type="date" placeholder="日期" id="inputWriteOffDate" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field">
+      轉帳/沖帳金額：<input type="text" placeholder="金額" id="inputWriteOffAmount" onkeyup="this.value=this.value.replace(/\D/g,'').replace(/^0{1,}/g,'')" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field">
+      備註：<input type="text" placeholder="備註" id="inputWriteOffRemark" />
+    </div>
+  </div>
+
+  <div class="row">
+    <button id="addWriteOff" class="btn red darken">新增</button>
+    <a href="/property/writeoff-list"><button class="btn right">取消</button></a>
+  </div>
+</div>
+
+<script type="text/javascript" src="/javascript/records/addwriteoff.js"></script>

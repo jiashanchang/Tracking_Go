@@ -1,0 +1,71 @@
+.financial {
+    margin: 20px;
+    display: flex;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.months, .years {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    cursor: pointer;
+}
+
+.month-cost {
+    text-align: center;
+}
+
+.lasting {
+    margin: 20px;
+    display: flex;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+}
+
+.cost, .income, .balance {
+    width: 33.33%;
+    border-radius: 5px;
+    margin: auto;
+    text-align: center;
+    cursor: pointer;
+}
+
+.year-cost, .month-income, .year-income, .month-net, .year-net {
+    text-align: center;
+    display: none;
+}
+
+.totalCost, .totalIncome, .net, .detailList {
+    text-align: center;
+    font-weight: bold;
+}
+
+.dispaly-detail-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.eachDetail {
+    margin: 20px;
+}
+
+#allchart {
+    width: 300px;
+    margin: auto;
+}
+
+@media (max-width: 700px) {
+    .dispaly-detail-list {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 0px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .detailList {
+        margin-bottom: 20px;
+    }
+  }

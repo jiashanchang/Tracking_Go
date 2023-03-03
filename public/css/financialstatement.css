@@ -1,0 +1,83 @@
+.balance-sheet {
+    margin: 10px 30px 100px 30px;
+    font-weight: bold;
+}
+
+.income-statement {
+    margin: 100px 30px 70px 30px;
+    font-weight: bold;
+}
+
+.title {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.period {
+    display: grid;
+    grid-template-columns: 59% 41% auto;
+    text-align: center;
+}
+
+.this-year {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    border-bottom: 1px solid;
+}
+
+.include {
+    display: grid;
+    grid-template-columns: 58% 20% 20%;
+    gap: 1%;
+    text-align: center;
+}
+
+.line {
+    border-bottom: 1px solid;
+}
+
+.span-three {
+    grid-column: span 3;
+    text-align: left;
+}
+
+.items {
+    text-align: left;
+    margin-left: 20px;
+}
+
+.amounts, .percentage {
+    text-align: center;
+}
+
+.move {
+    margin-left: 40px;
+}
+
+.left {
+    text-align: left;
+}
+
+.total {
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+}
+
+.double-line {
+    border-bottom: double; 
+}
+
+.liability-account {
+    text-align: center;
+    border-bottom: 1px solid;
+}
+
+.net-profit-or-loss {
+    margin-left: 20px;
+}
+
+.amount-after-tax, .percent-after-tax {
+    border-top: 1px solid;
+    border-bottom: double; 
+}
