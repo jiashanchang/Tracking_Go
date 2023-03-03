@@ -58,17 +58,19 @@ async function creditCategories() {
 creditCategories();
 
 // 修改沖帳
+const hidden = document.getElementById("hidden");
 const warnForm = document.getElementById("warnForm");
 const warn = document.getElementById("warn");
 const editWriteOff = document.getElementById("editWriteOff");
-editWriteOff.addEventListener("click", () => {
+
+async function editWriteOffList() {
   const debitCategory = document.getElementById("debitCategory");
   const creditCategory = document.getElementById("creditCategory");
   const inputWriteOffDate = document.getElementById("inputWriteOffDate");
   const inputWriteOffAmount = document.getElementById("inputWriteOffAmount");
   const inputWriteOffRemark = document.getElementById("inputWriteOffRemark");
   if (inputWriteOffAmount.value != "") {
-    fetch(`/api/writeoff_records/${id}`, {
+    let fetchAPI = await fetch(`/api/writeoff_records/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -81,25 +83,33 @@ editWriteOff.addEventListener("click", () => {
         writeOffRemark: inputWriteOffRemark.value,
       }),
     })
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (editSuccess) {
-        if (editSuccess) {
-          window.location.href = "/property";
-        } else {
-          warnForm.style.display = "block";
-          warn.textContent = `${editSuccess.message}`;
-          setTimeout(function () {
-            warnForm.style.display = "none";
-          }, 1500);
-        }
-      });
+    let editSuccess = await fetchAPI.json();
+    if (editSuccess) {
+      hidden.style.display = "block";
+      warnForm.style.display = "block";
+      warn.style.color = "#8ce600";
+      warn.textContent = "🅥 已修改此筆紀錄";
+      setTimeout(function () {
+        warnForm.style.display = "none";
+        hidden.style.display = "none";
+        window.location.href = "/property/writeoff-list";
+      }, 1500);
+    } else {
+      warnForm.style.display = "block";
+      warn.style.color = "red";
+      warn.textContent = "⚠ " + `${editSuccess.message}`;
+      setTimeout(function () {
+        warnForm.style.display = "none";
+      }, 1500);
+    }
   } else {
     warnForm.style.display = "block";
-    warn.textContent = "請輸入金額";
+    warn.style.color = "red";
+    warn.textContent = "⚠ 請輸入金額";
     setTimeout(function () {
       warnForm.style.display = "none";
     }, 1500);
   }
-});
+};
+
+editWriteOff.addEventListener("click", editWriteOffList);

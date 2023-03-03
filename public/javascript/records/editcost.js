@@ -58,17 +58,19 @@ async function assetLiabilityCategories() {
 assetLiabilityCategories();
 
 // 修改支出
+const hidden = document.getElementById("hidden");
 const warnForm = document.getElementById("warnForm");
 const warn = document.getElementById("warn");
 const editCost = document.getElementById("editCost");
-editCost.addEventListener("click", () => {
+
+async function editCostList() {
   const selectCategories = document.getElementById("categoriesList");
   const pay = document.getElementById("pay");
   const inputCostDate = document.getElementById("inputCostDate");
   const inputCostAmount = document.getElementById("inputCostAmount");
   const inputCostRemark = document.getElementById("inputCostRemark");
   if (inputCostAmount.value != "") {
-    fetch(`/api/cost_records/${id}`, {
+    let fetchAPI = await fetch(`/api/cost_records/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -81,25 +83,33 @@ editCost.addEventListener("click", () => {
         costRemark: inputCostRemark.value,
       }),
     })
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (editSuccess) {
-        if (editSuccess) {
-          window.location.href = "/property";
-        } else {
-          warnForm.style.display = "block";
-          warn.textContent = `${editSuccess.message}`;
-          setTimeout(function () {
-            warnForm.style.display = "none";
-          }, 1500);
-        }
-      });
+    let editSuccess = await fetchAPI.json();
+    if (editSuccess) {
+      hidden.style.display = "block";
+      warnForm.style.display = "block";
+      warn.style.color = "#8ce600";
+      warn.textContent = "🅥 已修改此筆紀錄";
+      setTimeout(function () {
+        warnForm.style.display = "none";
+        hidden.style.display = "none";
+        window.location.href = "/property/cost-list";
+      }, 1500);
+    } else {
+      warnForm.style.display = "block";
+      warn.style.color = "red";
+      warn.textContent = "⚠ " + `${editSuccess.message}`;
+      setTimeout(function () {
+        warnForm.style.display = "none";
+      }, 1500);
+    }
   } else {
     warnForm.style.display = "block";
-    warn.textContent = "請輸入金額";
+    warn.style.color = "red";
+    warn.textContent = "⚠ 請輸入金額";
     setTimeout(function () {
       warnForm.style.display = "none";
     }, 1500);
   }
-});
+}
+
+editCost.addEventListener("click", editCostList);

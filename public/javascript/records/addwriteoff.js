@@ -53,16 +53,27 @@ let today = year + "-" + month + "-" + day;
 document.getElementById("inputWriteOffDate").value = today;
 
 // 新增沖帳
+const hidden = document.getElementById("hidden");
 const warnForm = document.getElementById("warnForm");
 const warn = document.getElementById("warn");
 const addWriteOff = document.getElementById("addWriteOff");
-addWriteOff.addEventListener("click", () => {
+
+let isSubmitting = false;
+
+async function addWriteOffList() {
+  if (isSubmitting) {
+    addWriteOff.disabled = true;
+    return;
+  }
+
+  isSubmitting = true;
+
   const debitCategory = document.getElementById("debitCategory");
   const creditCategory = document.getElementById("creditCategory");
   const inputWriteOffDate = document.getElementById("inputWriteOffDate");
   const inputWriteOffAmount = document.getElementById("inputWriteOffAmount");
   const inputWriteOffRemark = document.getElementById("inputWriteOffRemark");
-  fetch(`/api/writeoff_records`, {
+  let fetchAPI = await fetch(`/api/writeoff_records`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -75,18 +86,27 @@ addWriteOff.addEventListener("click", () => {
       writeOffRemark: inputWriteOffRemark.value,
     }),
   })
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (addSuccess) {
-      if (addSuccess.ok) {
-        window.location.href = "/property";
-      } else {
-        warnForm.style.display = "block";
-        warn.textContent = `${addSuccess.message}`;
-        setTimeout(function () {
-          warnForm.style.display = "none";
-        }, 1500);
-      }
-    });
-});
+  let addSuccess = await fetchAPI.json();
+  addWriteOff.disabled = false;
+  isSubmitting = false;
+  if (addSuccess.ok) {
+    hidden.style.display = "block";
+    warnForm.style.display = "block";
+    warn.style.color = "#8ce600";
+    warn.textContent = "🅥 新增一筆沖帳";
+    setTimeout(function () {
+      warnForm.style.display = "none";
+      hidden.style.display = "none";
+      window.location.href = "/property/writeoff-list";
+    }, 1500);
+  } else {
+    warnForm.style.display = "block";
+    warn.style.color = "red";
+    warn.textContent = "⚠ " + `${addSuccess.message}`;
+    setTimeout(function () {
+      warnForm.style.display = "none";
+    }, 1000);
+  }
+};
+
+addWriteOff.addEventListener("click", addWriteOffList);

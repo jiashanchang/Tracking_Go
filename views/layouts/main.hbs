@@ -16,6 +16,7 @@
   </head>
   <body>
     <div class="planning">
+      <div id="hidden"></div>
       <div class="top">
         <div class="topTitle">
           <a href="/"><div class="project-name">
@@ -25,18 +26,30 @@
             <img src="/images/icon_burger.jpg" class="sidenav-trigger" />
           </label>
           <div class="menu">
-            <a href="/property"><span class="topic-choice selection">記帳本</span></a>
+            <span class="topic-choice selection" id="account-book">記帳本</span>
             <a href="/financialanalysis"><span class="topic-choice selection">財務分析</span></a>
             <a href="/financialstatement"><span class="topic-choice selection">財務報表</span></a>
             <a id="signout"><span class="topic-choice selection">登出</span></a>
+            <div class="list-menu">
+              <a href="/property/cost-list"><div class="records-list">支出清單</div></a>
+              <a href="/property/income-list"><div class="records-list">收入清單</div></a>
+              <a href="/property/writeoff-list"><div class="records-list">沖帳清單</div></a>
+              <a href="/property/incometax-list"><div class="records-list">所得稅清單</div></a>
+            </div>
           </div>
           <div class="open-menu">
-            <a href="/property"><span class="topic-choice selection">記帳本</span></a>
+            <span class="topic-choice selection" id="burger-account-book">記帳本</span>
             <a href="/financialanalysis"><span class="topic-choice selection">財務分析</span></a>
             <a href="/financialstatement"><span class="topic-choice selection">財務報表</span></a>
             <a id="logout"><span class="topic-choice selection">登出</span></a>
           </div>
         </div>
+      </div>
+      <div class="burger-list-menu">
+        <a href="/property/cost-list"><div class="records-list">支出清單</div></a>
+        <a href="/property/income-list"><div class="records-list">收入清單</div></a>
+        <a href="/property/writeoff-list"><div class="records-list">沖帳清單</div></a>
+        <a href="/property/incometax-list"><div class="records-list">所得稅清單</div></a>
       </div>
 
       <div id="warnForm">

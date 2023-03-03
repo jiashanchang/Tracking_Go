@@ -53,16 +53,27 @@ let today = year + "-" + month + "-" + day;
 document.getElementById("inputCostDate").value = today;
 
 // 新增支出
+const hidden = document.getElementById("hidden");
 const warnForm = document.getElementById("warnForm");
 const warn = document.getElementById("warn");
 const addCost = document.getElementById("addCost");
-addCost.addEventListener("click", () => {
+
+let isSubmitting = false;
+
+async function addCostList() {
+  if (isSubmitting) {
+    addCost.disabled = true;
+    return;
+  }
+
+  isSubmitting = true;
+
   const selectCategories = document.getElementById("categoriesList");
   const pay = document.getElementById("pay");
   const inputCostDate = document.getElementById("inputCostDate");
   const inputCostAmount = document.getElementById("inputCostAmount");
   const inputCostRemark = document.getElementById("inputCostRemark");
-  fetch(`/api/cost_records`, {
+  let fetchAPI = await fetch(`/api/cost_records`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -75,18 +86,27 @@ addCost.addEventListener("click", () => {
       costRemark: inputCostRemark.value,
     }),
   })
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (addSuccess) {
-      if (addSuccess.ok) {
-        window.location.href = "/property";
-      } else {
-        warnForm.style.display = "block";
-        warn.textContent = `${addSuccess.message}`;
-        setTimeout(function () {
-          warnForm.style.display = "none";
-        }, 1500);
-      }
-    });
-});
+  let addSuccess = await fetchAPI.json();
+  addCost.disabled = false;
+  isSubmitting = false;
+  if (addSuccess.ok) {
+    hidden.style.display = "block";
+    warnForm.style.display = "block";
+    warn.style.color = "#8ce600";
+    warn.textContent = "🅥 新增一筆支出";
+    setTimeout(function () {
+      warnForm.style.display = "none";
+      hidden.style.display = "none";
+      window.location.href = "/property/cost-list";
+    }, 1500);
+  } else {
+    warnForm.style.display = "block";
+    warn.style.color = "red";
+    warn.textContent = "⚠ " + `${addSuccess.message}`;
+    setTimeout(function () {
+      warnForm.style.display = "none";
+    }, 1000);
+  }
+};
+
+addCost.addEventListener("click", addCostList);

@@ -38,17 +38,19 @@ async function assetLiabilityCategories() {
 assetLiabilityCategories();
 
 // 修改所得稅
+const hidden = document.getElementById("hidden");
 const warnForm = document.getElementById("warnForm");
 const warn = document.getElementById("warn");
 const editTax = document.getElementById("editTax");
-editTax.addEventListener("click", () => {
+
+async function editIncomeTaxList() {
   const incomeTax = document.getElementById("income-tax");
   const taxPay = document.getElementById("taxPay");
   const inputTaxDate = document.getElementById("inputTaxDate");
   const inputTaxAmount = document.getElementById("inputTaxAmount");
   const inputTaxRemark = document.getElementById("inputTaxRemark");
   if (inputTaxAmount.value != "") {
-    fetch(`/api/tax_records/${id}`, {
+    let fetchAPI = await fetch(`/api/tax_records/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -61,25 +63,33 @@ editTax.addEventListener("click", () => {
         taxRemark: inputTaxRemark.value,
       }),
     })
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (editSuccess) {
-        if (editSuccess) {
-          window.location.href = "/property";
-        } else {
-          warnForm.style.display = "block";
-          warn.textContent = `${editSuccess.message}`;
-          setTimeout(function () {
-            warnForm.style.display = "none";
-          }, 1500);
-        }
-      });
+    let editSuccess = await fetchAPI.json();
+    if (editSuccess) {
+      hidden.style.display = "block";
+      warnForm.style.display = "block";
+      warn.style.color = "#8ce600";
+      warn.textContent = "🅥 已修改此筆紀錄";
+      setTimeout(function () {
+        warnForm.style.display = "none";
+        hidden.style.display = "none";
+        window.location.href = "/property/incometax-list";
+      }, 1500);
+    } else {
+      warnForm.style.display = "block";
+      warn.style.color = "red";
+      warn.textContent = "⚠ " + `${editSuccess.message}`;
+      setTimeout(function () {
+        warnForm.style.display = "none";
+      }, 1500);
+    }
   } else {
     warnForm.style.display = "block";
-    warn.textContent = "請輸入金額";
+    warn.style.color = "red";
+    warn.textContent = "⚠ 請輸入金額";
     setTimeout(function () {
       warnForm.style.display = "none";
     }, 1500);
   }
-});
+};
+
+editTax.addEventListener("click", editIncomeTaxList);

@@ -227,7 +227,7 @@ async function chooseIncomeMonthList() {
         str += `<div class="eachDetail"><span class="detailcreatedAt">${createDate}</span>
         <span class="detailCategory">${records.data[i].categoryId.category}</span>
         <span class="detailAmount"> $${records.data[i].amount.toLocaleString()}</span>
-        <a href="property/editcost/${records.data[i]._id}"><button class="btn">收入明細</button></a>
+        <a href="property/editincome/${records.data[i]._id}"><button class="btn">收入明細</button></a>
         </div>`;
         detailList.innerHTML = str;
         const label = records.data[i].categoryId.category;
@@ -309,7 +309,7 @@ async function incomeYearList() {
         str += `<div class="eachDetail"><span class="detailcreatedAt">${createDate}</span>
         <span class="detailCategory">${records.data[i].categoryId.category}</span>
         <span class="detailAmount"> $${records.data[i].amount.toLocaleString()}</span>
-        <a href="property/editcost/${records.data[i]._id}"><button class="btn">收入明細</button></a>
+        <a href="property/editincome/${records.data[i]._id}"><button class="btn">收入明細</button></a>
         </div>`;
         detailList.innerHTML = str;
         const label = records.data[i].categoryId.category;

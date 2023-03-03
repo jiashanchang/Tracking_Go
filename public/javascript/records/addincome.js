@@ -53,16 +53,27 @@ let today = year + "-" + month + "-" + day;
 document.getElementById("inputIncomeDate").value = today;
 
 // 新增收入
+const hidden = document.getElementById("hidden");
 const warnForm = document.getElementById("warnForm");
 const warn = document.getElementById("warn");
 const addIncome = document.getElementById("addIncome");
-addIncome.addEventListener("click", () => {
+
+let isSubmitting = false;
+
+async function addIncomeList() {
+  if (isSubmitting) {
+    addIncome.disabled = true;
+    return;
+  }
+
+  isSubmitting = true;
+
   const selectCategories = document.getElementById("categoriesList");
   const receive = document.getElementById("receive");
   const inputIncomeDate = document.getElementById("inputIncomeDate");
   const inputIncomeAmount = document.getElementById("inputIncomeAmount");
   const inputIncomeRemark = document.getElementById("inputIncomeRemark");
-  fetch(`/api/income_records`, {
+  let fetchAPI = await fetch(`/api/income_records`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -75,18 +86,27 @@ addIncome.addEventListener("click", () => {
       incomeRemark: inputIncomeRemark.value,
     }),
   })
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (addSuccess) {
-      if (addSuccess.ok) {
-        window.location.href = "/property";
-      } else {
-        warnForm.style.display = "block";
-        warn.textContent = `${addSuccess.message}`;
-        setTimeout(function () {
-          warnForm.style.display = "none";
-        }, 1500);
-      }
-    });
-});
+  let addSuccess = await fetchAPI.json();
+  addIncome.disabled = false;
+  isSubmitting = false;
+  if (addSuccess.ok) {
+    hidden.style.display = "block";
+    warnForm.style.display = "block";
+    warn.style.color = "#8ce600";
+    warn.textContent = "🅥 新增一筆收入";
+    setTimeout(function () {
+      warnForm.style.display = "none";
+      hidden.style.display = "none";
+      window.location.href = "/property/income-list";
+    }, 1500);
+  } else {
+    warnForm.style.display = "block";
+    warn.style.color = "red";
+    warn.textContent = "⚠ " + `${addSuccess.message}`;
+    setTimeout(function () {
+      warnForm.style.display = "none";
+    }, 1000);
+  }
+};
+
+addIncome.addEventListener("click", addIncomeList);

@@ -15,8 +15,20 @@ dotenv.config();
 
 router.use(bodyParser.json());
 
-router.get("/property", (req, res) => {
-  res.render("property");
+router.get("/property/cost-list", (req, res) => {
+  res.render("records/cost-list");
+});
+
+router.get("/property/income-list", (req, res) => {
+  res.render("records/income-list");
+});
+
+router.get("/property/writeoff-list", (req, res) => {
+  res.render("records/writeoff-list");
+});
+
+router.get("/property/incometax-list", (req, res) => {
+  res.render("records/incometax-list");
 });
 
 router.get("/property/records/addcost", (req, res) => {

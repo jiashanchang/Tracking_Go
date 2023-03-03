@@ -47,7 +47,11 @@ body {
   position: relative;
 }
 
-.signin {
+.isLogin {
+  display: none;
+}
+
+.signin, .signout, .membercenter {
   font-size: 16px;
   float: right;
   line-height: 54px;
@@ -72,7 +76,6 @@ body {
 }
 
 .middle {
-  margin-top: 74px;
   height: 74px;
   background-color: #178CA4;
 }
@@ -88,9 +91,26 @@ body {
   transform: translate(-50%, -50%);
 }
 
-.bottom {
-  height: 400px;
-  background-color: #F9F7F0;
+.gifFile {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 1160px;
+  margin: auto;
+  gap: 30px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+h2, h3 {
+  margin: 50px;
+  color: #072A40;
+}
+
+.gif {
+  margin: 40px;
+  width: 700px;
+  border-radius: 30px;
+  box-shadow:3px 3px 12px #072A40;
 }
 
 footer {
@@ -102,4 +122,27 @@ footer {
   color: #F9F7F0;
   justify-items: center;
   align-items: center;
+}
+
+@media (max-width: 1200px) {
+  .gifFile {
+    width: 90%;
+  }
+  .gif {
+    width: 90%;
+  }
+}
+
+@media (max-width: 800px) {
+  .gifFile {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+    padding-bottom: 30px;
+  }
+  h2, h3 {
+    margin: 30px;
+  }
+  .gif {
+    margin: auto;
+  }
 }

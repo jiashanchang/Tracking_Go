@@ -33,16 +33,27 @@ let today = year + "-" + month + "-" + day;
 document.getElementById("inputTaxDate").value = today;
 
 // 新增所得稅
+const hidden = document.getElementById("hidden");
 const warnForm = document.getElementById("warnForm");
 const warn = document.getElementById("warn");
 const addTax = document.getElementById("addTax");
-addTax.addEventListener("click", () => {
+
+let isSubmitting = false;
+
+async function addIncomeTaxList() {
+  if (isSubmitting) {
+    addTax.disabled = true;
+    return;
+  }
+
+  isSubmitting = true;
+
   const incomeTax = document.getElementById("income-tax");
   const taxPay = document.getElementById("taxPay");
   const inputTaxDate = document.getElementById("inputTaxDate");
   const inputTaxAmount = document.getElementById("inputTaxAmount");
   const inputTaxRemark = document.getElementById("inputTaxRemark");
-  fetch(`/api/tax_records`, {
+  let fetchAPI = await fetch(`/api/tax_records`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -55,18 +66,27 @@ addTax.addEventListener("click", () => {
       taxRemark: inputTaxRemark.value,
     }),
   })
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (addSuccess) {
-      if (addSuccess.ok) {
-        window.location.href = "/property";
-      } else {
-        warnForm.style.display = "block";
-        warn.textContent = `${addSuccess.message}`;
-        setTimeout(function () {
-          warnForm.style.display = "none";
-        }, 1500);
-      }
-    });
-});
+  let addSuccess = await fetchAPI.json();
+  addTax.disabled = false;
+  isSubmitting = false;
+  if (addSuccess.ok) {
+    hidden.style.display = "block";
+    warnForm.style.display = "block";
+    warn.style.color = "#8ce600";
+    warn.textContent = "🅥 新增一筆所得稅";
+    setTimeout(function () {
+      warnForm.style.display = "none";
+      hidden.style.display = "none";
+      window.location.href = "/property/incometax-list";
+    }, 1500);
+  } else {
+    warnForm.style.display = "block";
+    warn.style.color = "red";
+    warn.textContent = "⚠ " + `${addSuccess.message}`;
+    setTimeout(function () {
+      warnForm.style.display = "none";
+    }, 1000);
+  }
+};
+
+addTax.addEventListener("click", addIncomeTaxList);

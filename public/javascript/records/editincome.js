@@ -58,17 +58,19 @@ async function assetLiabilityCategories() {
 assetLiabilityCategories();
 
 // 修改收入
+const hidden = document.getElementById("hidden");
 const warnForm = document.getElementById("warnForm");
 const warn = document.getElementById("warn");
 const editIncome = document.getElementById("editIncome");
-editIncome.addEventListener("click", () => {
+
+async function editIncomeList() {
   const selectCategories = document.getElementById("categoriesList");
-  const receive = document.getElementById("receive")
+  const receive = document.getElementById("receive");
   const inputIncomeDate = document.getElementById("inputIncomeDate");
   const inputIncomeAmount = document.getElementById("inputIncomeAmount");
   const inputIncomeRemark = document.getElementById("inputIncomeRemark");
   if (inputIncomeAmount.value != "") {
-    fetch(`/api/income_records/${id}`, {
+    let fetchAPI = await fetch(`/api/income_records/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -81,25 +83,33 @@ editIncome.addEventListener("click", () => {
         incomeRemark: inputIncomeRemark.value,
       }),
     })
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (editSuccess) {
-        if (editSuccess) {
-          window.location.href = "/property";
-        } else {
-          warnForm.style.display = "block";
-          warn.textContent = `${editSuccess.message}`;
-          setTimeout(function () {
-            warnForm.style.display = "none";
-          }, 1500);
-        }
-      });
+    let editSuccess = await fetchAPI.json();
+    if (editSuccess) {
+      hidden.style.display = "block";
+      warnForm.style.display = "block";
+      warn.style.color = "#8ce600";
+      warn.textContent = "🅥 已修改此筆紀錄";
+      setTimeout(function () {
+        warnForm.style.display = "none";
+        hidden.style.display = "none";
+        window.location.href = "/property/income-list";
+      }, 1500);
+    } else {
+      warnForm.style.display = "block";
+      warn.style.color = "red";
+      warn.textContent = "⚠ " + `${editSuccess.message}`;
+      setTimeout(function () {
+        warnForm.style.display = "none";
+      }, 1500);
+    }
   } else {
     warnForm.style.display = "block";
-    warn.textContent = "請輸入金額";
+    warn.style.color = "red";
+    warn.textContent = "⚠ 請輸入金額";
     setTimeout(function () {
       warnForm.style.display = "none";
     }, 1500);
   }
-});
+};
+
+editIncome.addEventListener("click", editIncomeList);

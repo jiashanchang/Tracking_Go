@@ -54,3 +54,34 @@ window.addEventListener("click", function (event) {
     openMenu.style.display = "none";
   }
 });
+
+// 記帳本
+const listMenu = document.querySelector(".list-menu");
+const accountBook = document.getElementById("account-book");
+accountBook.addEventListener("mouseover", () => {
+  listMenu.style.display = "block";
+});
+
+listMenu.addEventListener("mouseover", () => {
+  listMenu.style.display = "block";
+});
+
+window.addEventListener("mouseover",() => {
+    listMenu.style.display = "none";
+  }, true);
+
+const burgerAccountBook = document.getElementById("burger-account-book");
+const burgerListMenu = document.querySelector(".burger-list-menu");
+function hideBurgerListMenu() {
+  if (window.innerWidth > 800) {
+    burgerListMenu.classList.remove("show");
+  }
+}
+
+burgerAccountBook.addEventListener("click", function () {
+  burgerListMenu.classList.toggle("show");
+});
+
+window.addEventListener("resize", hideBurgerListMenu);
+
+hideBurgerListMenu();

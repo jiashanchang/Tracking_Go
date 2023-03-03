@@ -19,10 +19,6 @@
     cursor: pointer;
 }
 
-.income-list-field, .writeoff-list-field, .tax-list-field {
-    display: none;
-}
-
 .all-records {
     display: grid;
     grid-template-columns: repeat(4, 265px);
@@ -72,7 +68,7 @@
     cursor: pointer;
 }
 
-.icon-plus:hover, .updateImg:hover, .deleteCostImg:hover, .deleteIncomeImg:hover, .deleteWriteOffImg:hover {
+.icon-plus:hover, .updateImg:hover, .deleteCostImg:hover, .deleteIncomeImg:hover, .deleteWriteOffImg:hover, .deleteTaxImg:hover {
     transform: scale(1.2);
 }
 
@@ -103,19 +99,19 @@
 
 @media (max-width: 1200px) {
     .all-records {
-      grid-template-columns: repeat(3, 270px);
+        grid-template-columns: repeat(3, 270px);
     }
-  }
+}
   
-  @media (max-width: 900px) {
+@media (max-width: 900px) {
     .all-records {
-      grid-template-columns: repeat(2, 270px);
+        grid-template-columns: repeat(2, 270px);
     }
-  }
+}
   
-  @media (max-width: 600px) {
+@media (max-width: 600px) {
     .all-records {
-      grid-template-columns: repeat(1, 320px);
-      gap: 15px;
+        grid-template-columns: repeat(1, 320px);
+        gap: 15px;
     }
-  }
+}
