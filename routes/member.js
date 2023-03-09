@@ -144,7 +144,7 @@ router.post("/api/member/signup", async (req, res) => {
 });
 
 // 登出
-router.get("/api/member/signout", (req, res) => {
+router.delete("/api/member/signout", (req, res) => {
   res.clearCookie("token");
   return res.json({ ok: true });
 });

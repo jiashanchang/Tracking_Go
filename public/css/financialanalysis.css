@@ -49,6 +49,26 @@
     padding-left: 15px;
 }
 
+.detailList {
+    margin-top: 15px;
+    width: 90%;
+    height: 250px;
+    overflow: auto;
+}
+
+.detailList::-webkit-scrollbar {
+    width: 1em;
+}
+
+.detailList::-webkit-scrollbar-track-piece {
+    background: #aaa;
+}
+
+.detailList::-webkit-scrollbar-thumb {
+    background-color: white;
+    border: 1px solid slategrey;
+}
+
 .eachDetail {
     margin: 20px;
 }
@@ -66,6 +86,7 @@
         padding-right: 0;
     }
     .detailList {
+        margin: auto;
         margin-bottom: 20px;
     }
-  }
+}

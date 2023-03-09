@@ -95,3 +95,45 @@ async function deleteWriteOffRecord(Id) {
     window.location.reload();
   }
 }
+
+// 搜尋沖帳關鍵字
+const warnForm = document.getElementById("warnForm");
+const warn = document.getElementById("warn");
+const searchCategoryInput = document.getElementById("search-category");
+const searchCategoryButton = document.getElementById("btn-search");
+
+searchCategoryButton.addEventListener("click", async () => {
+  const category = searchCategoryInput.value;
+  const response = await fetch(`/api/writeoff_records?search=${category}`, {
+    method: "GET",
+  });
+  let keyword = await response.json();
+  if (!keyword || !keyword.data || keyword.data.length === 0) {
+    warnForm.style.display = "block";
+    warn.style.color = "red";
+    warn.textContent = "⚠ 查無此關鍵字";
+    setTimeout(function () {
+      warnForm.style.display = "none";
+    }, 1000);
+    return;
+  }
+  keyword = keyword.data;
+  const pageNumber = document.querySelector(".writeOffPageNumber");
+  const buttonNumber = Math.ceil(keyword.length / 52);
+  let str = "";
+  for (let j = 0; j < buttonNumber; j++) {
+    str += `<span>${j + 1}</span>`;
+  }
+  pageNumber.innerHTML = str;
+  const allWriteOffButton = document.querySelectorAll(
+    ".writeOffPageNumber span"
+  );
+
+  for (let j = 0; j < allWriteOffButton.length; j++) {
+    allWriteOffButton[j].addEventListener(
+      "click",
+      writeOffPage.bind(this, j + 1, keyword)
+    );
+  }
+  writeOffPage(1, keyword);
+});

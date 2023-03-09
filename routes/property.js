@@ -10,6 +10,7 @@ const assetLiabilityCategory = require("../models/assetliabilitycategory");
 const writeOffRecord = require("../models/writeoffrecord");
 const taxRecord = require("../models/taxrecord");
 const dotenv = require("dotenv");
+const mongoose = require("mongoose");
 
 dotenv.config();
 
@@ -60,13 +61,29 @@ router.get("/api/cost_records", async (req, res) => {
     const checkJWT = jwt.verify(cookies, process.env.JWT_SECRET);
     const memberId = checkJWT.id;
     if (checkJWT) {
-      const records = await costRecord
-        .find({ memberId: memberId })
-        .populate("categoryId")
-        .populate("payId")
-        .lean()
-        .sort({ createdAt: -1 });
-      return res.json({ data: records });
+      if (req.query.search === undefined) {
+        const records = await costRecord
+          .find({ memberId: memberId })
+          .populate("categoryId")
+          .populate("payId")
+          .lean()
+          .sort({ createdAt: -1 });
+        return res.json({ data: records });
+      } else {
+        const keyword = req.query.search;
+        const costKeywordList = await costRecord
+          .find({ memberId: memberId })
+          .populate("categoryId")
+          .populate("payId")
+          .lean()
+          .sort({ createdAt: -1 });
+        const filteredCostList = costKeywordList.filter((cost) =>
+          cost.categoryId.category.toLowerCase().includes(keyword.toLowerCase()) ||
+          cost.payId.category.toLowerCase().includes(keyword.toLowerCase()) ||
+          cost.remark.toLowerCase().includes(keyword.toLowerCase())
+        );
+        return res.json({ data: filteredCostList });
+      }
     }
   } catch (error) {
     return res.status(500).json({
@@ -89,13 +106,29 @@ router.get("/api/income_records", async (req, res) => {
     const checkJWT = jwt.verify(cookies, process.env.JWT_SECRET);
     const memberId = checkJWT.id;
     if (checkJWT) {
-      const records = await incomeRecord
-        .find({ memberId: memberId })
-        .populate("categoryId")
-        .populate("receiveId")
-        .lean()
-        .sort({ createdAt: -1 });
-      return res.json({ data: records });
+      if (req.query.search === undefined) {
+        const records = await incomeRecord
+          .find({ memberId: memberId })
+          .populate("categoryId")
+          .populate("receiveId")
+          .lean()
+          .sort({ createdAt: -1 });
+        return res.json({ data: records });
+      } else {
+        const keyword = req.query.search;
+        const incomeKeywordList = await incomeRecord
+          .find({ memberId: memberId })
+          .populate("categoryId")
+          .populate("receiveId")
+          .lean()
+          .sort({ createdAt: -1 });
+        const filteredIncomeList = incomeKeywordList.filter((income) =>
+          income.categoryId.category.toLowerCase().includes(keyword.toLowerCase()) ||
+          income.receiveId.category.toLowerCase().includes(keyword.toLowerCase()) ||
+          income.remark.toLowerCase().includes(keyword.toLowerCase())
+        );
+        return res.json({ data: filteredIncomeList });
+      }
     }
   } catch (error) {
     return res.status(500).json({
@@ -118,13 +151,29 @@ router.get("/api/writeoff_records", async (req, res) => {
     const checkJWT = jwt.verify(cookies, process.env.JWT_SECRET);
     const memberId = checkJWT.id;
     if (checkJWT) {
-      const records = await writeOffRecord
-        .find({ memberId: memberId })
-        .populate("payId")
-        .populate("receiveId")
-        .lean()
-        .sort({ createdAt: -1 });
-      return res.json({ data: records });
+      if (req.query.search === undefined) {
+        const records = await writeOffRecord
+          .find({ memberId: memberId })
+          .populate("payId")
+          .populate("receiveId")
+          .lean()
+          .sort({ createdAt: -1 });
+        return res.json({ data: records });
+      } else {
+        const keyword = req.query.search;
+        const writeOffKeywordList = await writeOffRecord
+          .find({ memberId: memberId })
+          .populate("payId")
+          .populate("receiveId")
+          .lean()
+          .sort({ createdAt: -1 });
+        const filteredWriteOffList = writeOffKeywordList.filter((writeOff) =>
+          writeOff.payId.category.toLowerCase().includes(keyword.toLowerCase()) ||
+          writeOff.receiveId.category.toLowerCase().includes(keyword.toLowerCase()) ||
+          writeOff.remark.toLowerCase().includes(keyword.toLowerCase())
+        );
+        return res.json({ data: filteredWriteOffList });
+      }
     }
   } catch (error) {
     return res.status(500).json({
@@ -147,12 +196,27 @@ router.get("/api/tax_records", async (req, res) => {
     const checkJWT = jwt.verify(cookies, process.env.JWT_SECRET);
     const memberId = checkJWT.id;
     if (checkJWT) {
-      const records = await taxRecord
-        .find({ memberId: memberId })
-        .populate("taxPayId")
-        .lean()
-        .sort({ createdAt: -1 });
-      return res.json({ data: records });
+      if (req.query.search === undefined) {
+        const records = await taxRecord
+          .find({ memberId: memberId })
+          .populate("taxPayId")
+          .lean()
+          .sort({ createdAt: -1 });
+        return res.json({ data: records });
+      } else {
+        const keyword = req.query.search;
+        const taxKeywordList = await taxRecord
+          .find({ memberId: memberId })
+          .populate("taxPayId")
+          .lean()
+          .sort({ createdAt: -1 });
+        const filteredTaxList = taxKeywordList.filter((tax) =>
+          tax.incomeTax.toLowerCase().includes(keyword.toLowerCase()) ||
+          tax.taxPayId.category.toLowerCase().includes(keyword.toLowerCase()) ||
+          tax.remark.toLowerCase().includes(keyword.toLowerCase())
+        );
+        return res.json({ data: filteredTaxList });
+      }
     }
   } catch (error) {
     return res.status(500).json({
@@ -595,7 +659,7 @@ router.get("/property/editwriteoff/:id", async (req, res) => {
           _id: req.params.id,
         })
         .lean();
-      res.render("records/editwriteOff", {
+      res.render("records/editwriteoff", {
         writeOffRecords,
       });
     }

@@ -64,15 +64,23 @@ for (let j = 2020; j < 2100; j++) {
 
 // 支出顏色
 const doughnutCostColor = [
+    "#400012",
+    "#550018",
+    "#5E001A",
     "#67001D",
     "#880027",
     "#A10C37",
+    "#B11D48",
     "#C02E59",
+    "#CA3965",
     "#D44470",
     "#E35E88",
+    "#EF91AF",
     "#F2789F",
+    "#F69EBB",
     "#F599B7",
     "#FABED2",
+    "#FAC9DA",
 ];
 
 // 收入顏色
@@ -355,7 +363,7 @@ async function monthlyNetIncome() {
     const incomeDiv = document.createElement("div");
     incomeDiv.className = "eachDetail";
     const incomeName = document.createTextNode("總收入");
-    const monthTotalIncome = document.createTextNode("$" + incomeSum);
+    const monthTotalIncome = document.createTextNode("$" + incomeSum.toLocaleString());
     detailList.appendChild(incomeDiv);
     incomeDiv.appendChild(incomeName);
     incomeDiv.appendChild(monthTotalIncome);
@@ -363,7 +371,7 @@ async function monthlyNetIncome() {
     const costDiv = document.createElement("div");
     costDiv.className = "eachDetail";
     const costName = document.createTextNode("總支出");
-    const monthTotalCost = document.createTextNode("$" + costSum);
+    const monthTotalCost = document.createTextNode("$" + costSum.toLocaleString());
     detailList.appendChild(costDiv);
     costDiv.appendChild(costName);
     costDiv.appendChild(monthTotalCost);
@@ -402,7 +410,7 @@ async function yearlyNetIncome() {
     const incomeDiv = document.createElement("div");
     incomeDiv.className = "eachDetail";
     const incomeName = document.createTextNode("總收入");
-    const monthTotalIncome = document.createTextNode("$" + incomeSum);
+    const monthTotalIncome = document.createTextNode("$" + incomeSum.toLocaleString());
     detailList.appendChild(incomeDiv);
     incomeDiv.appendChild(incomeName);
     incomeDiv.appendChild(monthTotalIncome);
@@ -410,7 +418,7 @@ async function yearlyNetIncome() {
     const costDiv = document.createElement("div");
     costDiv.className = "eachDetail";
     const costName = document.createTextNode("總支出");
-    const monthTotalCost = document.createTextNode("$" + costSum);
+    const monthTotalCost = document.createTextNode("$" + costSum.toLocaleString());
     detailList.appendChild(costDiv);
     costDiv.appendChild(costName);
     costDiv.appendChild(monthTotalCost);

@@ -14,6 +14,10 @@ const incomeCategorySchema = new mongoose.Schema({
             ref: "incomerecords",
         },
     ],
+    memberId: {
+        type: Schema.Types.ObjectId,
+        ref: "members",
+    },
 }, { versionKey: false });
 
 module.exports = mongoose.model("incomecategories", incomeCategorySchema);

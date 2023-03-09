@@ -14,6 +14,10 @@ const costCategorySchema = new mongoose.Schema({
             ref: "costrecords",
         },
     ],
+    memberId: {
+        type: Schema.Types.ObjectId,
+        ref: "members",
+    },
 }, { versionKey: false });
 
 module.exports = mongoose.model("costcategories", costCategorySchema);

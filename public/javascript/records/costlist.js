@@ -95,3 +95,43 @@ async function deleteCostRecord(Id) {
     window.location.reload();
   }
 }
+
+// 搜尋支出關鍵字
+const warnForm = document.getElementById("warnForm");
+const warn = document.getElementById("warn");
+const searchCategoryInput = document.getElementById("search-category");
+const searchCategoryButton = document.getElementById("btn-search");
+
+searchCategoryButton.addEventListener("click", async () => {
+  const category = searchCategoryInput.value;
+  const response = await fetch(`/api/cost_records?search=${category}`, {
+    method: "GET",
+  });
+  let keyword = await response.json();
+  if (!keyword || !keyword.data || keyword.data.length === 0) {
+    warnForm.style.display = "block";
+    warn.style.color = "red";
+    warn.textContent = "⚠ 查無此關鍵字";
+    setTimeout(function () {
+      warnForm.style.display = "none";
+    }, 1000);
+    return;
+  }
+  keyword = keyword.data;
+  const pageNumber = document.querySelector(".costPageNumber");
+  const buttonNumber = Math.ceil(keyword.length / 52);
+  let str = "";
+  for (let j = 0; j < buttonNumber; j++) {
+    str += `<span>${j + 1}</span>`;
+  }
+  pageNumber.innerHTML = str;
+  const allCostButton = document.querySelectorAll(".costPageNumber span");
+
+  for (let j = 0; j < allCostButton.length; j++) {
+    allCostButton[j].addEventListener(
+      "click",
+      costPage.bind(this, j + 1, keyword)
+    );
+  }
+  costPage(1, keyword);
+});
