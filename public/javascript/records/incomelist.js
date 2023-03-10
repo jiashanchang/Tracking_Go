@@ -103,7 +103,7 @@ const searchCategoryButton = document.getElementById("btn-search");
 
 searchCategoryButton.addEventListener("click", async () => {
   const category = searchCategoryInput.value;
-  const response = await fetch(`/api/income_records?search=${category}`, {
+  let response = await fetch(`/api/income_records?search=${category}`, {
     method: "GET",
   });
   let keyword = await response.json();
@@ -134,3 +134,38 @@ searchCategoryButton.addEventListener("click", async () => {
   }
   incomePage(1, keyword);
 });
+
+// 收入分類
+async function searchCategories() {
+  let response = await fetch(`/api/income_categories`, {
+    method: "GET",
+  })
+  let data = await response.json();
+  const countCategories = data.data.length;
+  for (let j = 0; j < countCategories; j++) {
+    const categoriesListElement = document.getElementById("category-list");
+    const categories = document.createElement("li");
+    const categoriesTitle = document.createTextNode(data.data[j].category);
+    categories.setAttribute("class", "categories");
+    categories.appendChild(categoriesTitle);
+    categories.addEventListener("click", chooseCategories);
+    categoriesListElement.appendChild(categories);
+  }
+};
+
+searchCategories();
+
+// 選擇收入分類
+function chooseCategories() {
+  const categoriesValue = document.getElementById("search-category");
+  categoriesValue.value = this.textContent;
+}
+
+document.onclick = function (event) {
+  const categoriesList = document.getElementById("category-list");
+  if (event.target.id != "search-category") {
+    categoriesList.style.display = "none";
+  } else {
+    categoriesList.style.display = "flex";
+  }
+};

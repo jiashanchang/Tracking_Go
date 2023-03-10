@@ -9,6 +9,10 @@ const cancelEditIncomeCategory = document.getElementById("cancelEditIncomeCatego
 const inputIncomeCategory = document.getElementById("inputIncomeCategory");
 const addIncomeCategoryImg = document.getElementById("addIncomeCategoryImg");
 
+const hidden = document.getElementById("hidden");
+const warnForm = document.getElementById("warnForm");
+const warn = document.getElementById("warn");
+
 addIncomeCategoryImg.addEventListener("click", () => {
   addIncomeCategory.style.display = "block";
 });
@@ -97,13 +101,22 @@ async function updateIncomeCategory(Id) {
   })
   let editSuccess = await response.json();
   if (editSuccess.ok) {
-    window.location.reload();
+    hidden.style.display = "block";
+    editIncomeCategory.style.display = "none";
+    warnForm.style.display = "block";
+    warn.style.color = "#8ce600";
+    warn.textContent = "🅥 分類修改成功" ;
+    setTimeout(function () {
+      warnForm.style.display = "none";
+      hidden.style.display = "none";
+      window.location.reload();
+    }, 1000);
   } else {
     editIncomeMessage.style.display = "flex";
     editIncomeMessage.textContent = `${editSuccess.message}`;
     setTimeout(function () {
       editIncomeMessage.style.display = "none";
-    }, 1500);
+    }, 1000);
   }
 };
 
@@ -121,13 +134,22 @@ async function addNewIncomeCategory() {
   });
   let newIncomeCategory = await response.json();
   if (newIncomeCategory.ok) {
-    window.location.reload();
+    hidden.style.display = "block";
+    addIncomeCategory.style.display = "none";
+    warnForm.style.display = "block";
+    warn.style.color = "#8ce600";
+    warn.textContent = "🅥 分類新增成功" ;
+    setTimeout(function () {
+      warnForm.style.display = "none";
+      hidden.style.display = "none";
+      window.location.reload();
+    }, 1000);
   } else {
     addIncomeMessage.style.display = "flex";
     addIncomeMessage.textContent = `${newIncomeCategory.message}`;
     setTimeout(function () {
       addIncomeMessage.style.display = "none";
-    }, 1500);
+    }, 1000);
   }
 }
 
@@ -135,8 +157,6 @@ const addIncomeCategoryBtn = document.getElementById("addIncomeCategoryBtn");
 addIncomeCategoryBtn.addEventListener("click", addNewIncomeCategory);
 
 // 刪除收入分類
-const warnForm = document.getElementById("warnForm");
-const warn = document.getElementById("warn");
 async function deleteIncomeCategory(Id) {
   let url = `/api/income_categories/${Id}`;
   let response = await fetch(url, {

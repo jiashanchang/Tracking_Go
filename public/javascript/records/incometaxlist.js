@@ -104,7 +104,7 @@ const searchCategoryButton = document.getElementById("btn-search");
 
 searchCategoryButton.addEventListener("click", async () => {
   const category = searchCategoryInput.value;
-  const response = await fetch(`/api/tax_records?search=${category}`, {
+  let response = await fetch(`/api/tax_records?search=${category}`, {
     method: "GET",
   });
   let keyword = await response.json();
@@ -135,3 +135,34 @@ searchCategoryButton.addEventListener("click", async () => {
   }
   taxPage(1, keyword);
 });
+
+// 所得稅分類
+async function searchCategories() {
+  const categories = ["所得稅費用", "所得稅利益"];
+  const categoriesListElement = document.getElementById("category-list");
+  categories.forEach((category) => {
+    const categoriesItem = document.createElement("li");
+    const categoriesTitle = document.createTextNode(category);
+    categoriesItem.setAttribute("class", "categories");
+    categoriesItem.appendChild(categoriesTitle);
+    categoriesItem.addEventListener("click", chooseCategories);
+    categoriesListElement.appendChild(categoriesItem);
+  });
+}
+
+searchCategories()
+
+// 選擇所得稅分類
+function chooseCategories() {
+  const categoriesValue = document.getElementById("search-category");
+  categoriesValue.value = this.textContent;
+}
+
+document.onclick = function (event) {
+  const categoriesList = document.getElementById("category-list");
+  if (event.target.id != "search-category") {
+    categoriesList.style.display = "none";
+  } else {
+    categoriesList.style.display = "flex";
+  }
+};

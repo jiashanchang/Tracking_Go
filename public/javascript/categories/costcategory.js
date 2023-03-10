@@ -9,6 +9,10 @@ const cancelEditCostCategory = document.getElementById("cancelEditCostCategory")
 const inputCostCategory = document.getElementById("inputCostCategory");
 const addCostCategoryImg = document.getElementById("addCostCategoryImg");
 
+const hidden = document.getElementById("hidden");
+const warnForm = document.getElementById("warnForm");
+const warn = document.getElementById("warn");
+
 addCostCategoryImg.addEventListener("click", () => {
   addCostCategory.style.display = "block";
 });
@@ -97,13 +101,22 @@ async function updateCostCategory(Id) {
   })
   let editSuccess = await response.json();
   if (editSuccess.ok) {
-    window.location.reload();
+    hidden.style.display = "block";
+    editCostCategory.style.display = "none";
+    warnForm.style.display = "block";
+    warn.style.color = "#8ce600";
+    warn.textContent = "🅥 分類修改成功" ;
+    setTimeout(function () {
+      warnForm.style.display = "none";
+      hidden.style.display = "none";
+      window.location.reload();
+    }, 1000);
   } else {
     editCostMessage.style.display = "flex";
     editCostMessage.textContent = `${editSuccess.message}`;
     setTimeout(function () {
       editCostMessage.style.display = "none";
-    }, 1500);
+    }, 1000);
   }
 };
 
@@ -121,13 +134,22 @@ async function addNewCostCategory() {
   });
   let newCostCategory = await response.json();
   if (newCostCategory.ok) {
-    window.location.reload();
+    hidden.style.display = "block";
+    addCostCategory.style.display = "none";
+    warnForm.style.display = "block";
+    warn.style.color = "#8ce600";
+    warn.textContent = "🅥 分類新增成功" ;
+    setTimeout(function () {
+      warnForm.style.display = "none";
+      hidden.style.display = "none";
+      window.location.reload();
+    }, 1000);
   } else {
     addCostMessage.style.display = "flex";
     addCostMessage.textContent = `${newCostCategory.message}`;
     setTimeout(function () {
       addCostMessage.style.display = "none";
-    }, 1500);
+    }, 1000);
   }
 }
 
@@ -135,8 +157,6 @@ const addCostCategoryBtn = document.getElementById("addCostCategoryBtn");
 addCostCategoryBtn.addEventListener("click", addNewCostCategory);
 
 // 刪除支出分類
-const warnForm = document.getElementById("warnForm");
-const warn = document.getElementById("warn");
 async function deleteCostCategory(Id) {
   let url = `/api/cost_categories/${Id}`;
   let response = await fetch(url, {

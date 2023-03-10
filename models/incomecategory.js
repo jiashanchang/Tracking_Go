@@ -5,7 +5,6 @@ const incomeCategorySchema = new mongoose.Schema({
     category: {
         type: String,
         trim: true,
-        unique: true,
         required: true,
     },
     recordId: [

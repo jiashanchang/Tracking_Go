@@ -120,34 +120,6 @@ label {
     justify-content: center;
 }
 
-#warnForm {
-    position: fixed;
-    transform: translate(-170px,0px);
-    top: 80px;
-    left: 50%;
-    width: 340px;
-    background: #FFFFFF;
-    box-shadow: 0px 4px 60px #AAAAAA;
-    border-radius: 6px;
-    z-index: 2;
-    display: none;
-}
-
-#cover {
-    background: linear-gradient(270deg, #072A40 0%, #178CA4 100%);
-    background-size: 340px 10px;
-    background-repeat: no-repeat;
-    border-radius: 6px;
-}
-
-#warn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
-    font-size: 16px;
-}
-
 .contain {
     display: grid;
     grid-template-columns: minmax(360px,1200px);

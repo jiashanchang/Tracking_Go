@@ -78,7 +78,7 @@ async function addIncomeTaxList() {
       warnForm.style.display = "none";
       hidden.style.display = "none";
       window.location.href = "/property/incometax-list";
-    }, 1500);
+    }, 1000);
   } else {
     warnForm.style.display = "block";
     warn.style.color = "red";

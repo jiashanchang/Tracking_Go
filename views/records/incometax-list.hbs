@@ -2,8 +2,9 @@
   <div class="main-top">
     <div class="createRecord">
       <div class="keyword-search-field">
-        <input type="text" placeholder="請輸入關鍵字" id="search-category">
+        <input type="text" placeholder="請輸入所得稅類別或備註內容" id="search-category">
         <button type="submit" class="btn" id="btn-search">查詢</button>
+        <div id="category-list"></div>
       </div>
       <div class="noRecord">
         <img src="/images/icon_record.jpg" class="icon-record" />
@@ -11,7 +12,7 @@
       </div>
 
       <div class="tax-list-field">
-        <h3>所得稅清單</h3>
+        <h2>所得稅清單</h2>
         <div class="incomeTaxRecordList all-records"></div>
         <div class="incomeTaxPageNumber"></div>
         <a href="/property/records/addincometax"><img src="/images/icon_plus.jpg" class="icon-plus"/></a>

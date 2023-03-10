@@ -93,14 +93,14 @@ async function editWriteOffList() {
         warnForm.style.display = "none";
         hidden.style.display = "none";
         window.location.href = "/property/writeoff-list";
-      }, 1500);
+      }, 1000);
     } else {
       warnForm.style.display = "block";
       warn.style.color = "red";
       warn.textContent = "⚠ " + `${editSuccess.message}`;
       setTimeout(function () {
         warnForm.style.display = "none";
-      }, 1500);
+      }, 1000);
     }
   } else {
     warnForm.style.display = "block";
@@ -108,7 +108,7 @@ async function editWriteOffList() {
     warn.textContent = "⚠ 請輸入金額";
     setTimeout(function () {
       warnForm.style.display = "none";
-    }, 1500);
+    }, 1000);
   }
 };
 
