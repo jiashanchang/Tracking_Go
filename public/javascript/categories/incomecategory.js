@@ -105,7 +105,7 @@ async function updateIncomeCategory(Id) {
     editIncomeCategory.style.display = "none";
     warnForm.style.display = "block";
     warn.style.color = "#8ce600";
-    warn.textContent = "🅥 分類修改成功" ;
+    warn.textContent = "🅥 分類更新成功";
     setTimeout(function () {
       warnForm.style.display = "none";
       hidden.style.display = "none";
@@ -138,7 +138,7 @@ async function addNewIncomeCategory() {
     addIncomeCategory.style.display = "none";
     warnForm.style.display = "block";
     warn.style.color = "#8ce600";
-    warn.textContent = "🅥 分類新增成功" ;
+    warn.textContent = "🅥 分類新增成功";
     setTimeout(function () {
       warnForm.style.display = "none";
       hidden.style.display = "none";

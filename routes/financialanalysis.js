@@ -29,6 +29,7 @@ router.get("/api/monthly/cost", async (req, res) => {
     }
     const month = req.query.month;
     const newMonth = month.slice(-2);
+    const newYear = month.slice(0, 4);
     const checkJWT = jwt.verify(cookies, process.env.JWT_SECRET);
     const memberId = checkJWT.id;
     if (checkJWT) {
@@ -37,7 +38,7 @@ router.get("/api/monthly/cost", async (req, res) => {
         .lean()
         .then((matchRecord) => {
           costRecord
-            .find({ memberId: memberId, month: newMonth })
+            .find({ memberId: memberId, year: newYear, month: newMonth })
             .populate("categoryId")
             .lean()
             .sort({ createdAt: -1 })
@@ -68,6 +69,7 @@ router.get("/api/monthly/income", async (req, res) => {
     }
     const month = req.query.month;
     const newMonth = month.slice(-2);
+    const newYear = month.slice(0, 4);
     const checkJWT = jwt.verify(cookies, process.env.JWT_SECRET);
     const memberId = checkJWT.id;
     if (checkJWT) {
@@ -76,7 +78,7 @@ router.get("/api/monthly/income", async (req, res) => {
         .lean()
         .then((matchRecord) => {
           incomeRecord
-            .find({ memberId: memberId, month: newMonth })
+            .find({ memberId: memberId, year: newYear, month: newMonth })
             .populate("categoryId")
             .lean()
             .sort({ createdAt: -1 })
@@ -183,6 +185,7 @@ router.get("/api/monthly/net", async (req, res) => {
     }
     const month = req.query.month;
     const newMonth = month.slice(-2);
+    const newYear = month.slice(0, 4);
     const checkJWT = jwt.verify(cookies, process.env.JWT_SECRET);
     const memberId = checkJWT.id;
     if (checkJWT) {
@@ -190,19 +193,36 @@ router.get("/api/monthly/net", async (req, res) => {
         {
           $match: {
             memberId: mongoose.Types.ObjectId(memberId),
+            year: newYear,
             month: newMonth,
           },
         },
+        {
+          $group: {
+            _id: null,
+            totalCost: { $sum: "$amount" }
+          }
+        }
       ]);
       const incomeAmountList = await incomeRecord.aggregate([
         {
           $match: {
             memberId: mongoose.Types.ObjectId(memberId),
+            year: newYear,
             month: newMonth,
           },
         },
+        {
+          $group: {
+            _id: null,
+            totalIncome: { $sum: "$amount" }
+          }
+        }
       ]);
-      return res.json({ data: { costAmountList, incomeAmountList } });
+      const totalCost = costAmountList.length > 0 ? costAmountList[0].totalCost : 0;
+      const totalIncome = incomeAmountList.length > 0 ? incomeAmountList[0].totalIncome : 0;
+      const netAmount = totalIncome - totalCost;
+      return res.json({ data: { month, totalCost, totalIncome, netAmount } });
     }
   } catch (error) {
     return res.status(500).json({
@@ -230,13 +250,28 @@ router.get("/api/yearly/net", async (req, res) => {
         {
           $match: { memberId: mongoose.Types.ObjectId(memberId), year: year },
         },
+        {
+          $group: {
+            _id: null,
+            totalCost: { $sum: "$amount" }
+          }
+        }
       ]);
       const incomeAmountList = await incomeRecord.aggregate([
         {
           $match: { memberId: mongoose.Types.ObjectId(memberId), year: year },
         },
+        {
+          $group: {
+            _id: null,
+            totalIncome: { $sum: "$amount" }
+          }
+        }
       ]);
-      return res.json({ data: { costAmountList, incomeAmountList } });
+      const totalCost = costAmountList.length > 0 ? costAmountList[0].totalCost : 0;
+      const totalIncome = incomeAmountList.length > 0 ? incomeAmountList[0].totalIncome : 0;
+      const netAmount = totalIncome - totalCost;
+      return res.json({ data: { year, totalCost, totalIncome, netAmount } });
     }
   } catch (error) {
     return res.status(500).json({

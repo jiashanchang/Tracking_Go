@@ -41,7 +41,7 @@ router.get("/api/cost_categories", async (req, res) => {
           { memberId: { $exists: false } }
         ]
       });
-      return res.json({ ok: true, data: data });
+      return res.json({ data: data });
     }
   } catch (error) {
     return res.status(500).json({
@@ -69,7 +69,7 @@ router.get("/api/income_categories", async (req, res) => {
           { memberId: { $exists: false } }
         ]
       });
-      return res.json({ ok: true, data: data });
+      return res.json({ data: data });
     }
   } catch (error) {
     return res.status(500).json({
@@ -92,7 +92,7 @@ router.get("/api/asset_and_liability_categories", async (req, res) => {
     const checkJWT = jwt.verify(cookies, process.env.JWT_SECRET);
     if (checkJWT) {
       const data = await assetLiabilityCategory.find();
-      return res.json({ ok: true, data: data });
+      return res.json({ data: data });
     }
   } catch (error) {
     return res.status(500).json({
