@@ -1,7 +1,7 @@
 # 記帳趣 Tracking_Go
 
 <p align="center">
-  <img src="/images/logo.jpg" width="150px">
+  <img src="/public/images/logo.jpg" width="150px">
 </p>
 
 Tracking_Go is a powerful expense-tracking website that allows users to gain valuable insights into their spending habits and financial status.
@@ -30,26 +30,26 @@ Test account and password：test@gmail.com / test12345
 * User authentication with Json Web Token.
 * Allows users to clearly record every expense and gain a better understanding of their spending habits.
 
-![image](/images/add_record.gif)
+![image](/public/images/add_record.gif)
 
 </br>
 
 * Personalize income and expense tracking with custom categories for improved financial management.
 
-![image](/images/add_category.gif)
+![image](/public/images/add_category.gif)
 
 </br>
 
 * Enabling users to analyze their fixed and variable expenses and track their money flow.
 
-![image](/images/analyze.gif)
+![image](/public/images/analyze.gif)
 
 </br>
 
 * Enable users to evaluate their financial status, liquidity, long-term fund accessibility, cash flow generation, capital shifts, and profitability disclosures.
 * Use Redis cache to enable fast financial statement data retrieval for users.
 
-![image](/images/report.gif)
+![image](/public/images/report.gif)
 
 ## Backend Technique <a name="backend-technique"></a>
 
@@ -83,11 +83,11 @@ Test account and password：test@gmail.com / test12345
 
 ### Architecture <a name="architecture"></a>
 
-![image](/images/Server_Architecture.png)
+![image](/public/images/Server_Architecture.png)
 
 ### Database Schema <a name="databaseschema"></a>
 
-![image](/images/DBschema.png)
+![image](/public/images/DBschema.png)
 
 ## Frontend Technique <a name="frontend-technique"></a>
 
