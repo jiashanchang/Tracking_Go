@@ -84,6 +84,10 @@ function costPage(page, data) {
   });
 }
 
+const hidden = document.getElementById("hidden");
+const warnForm = document.getElementById("warnForm");
+const warn = document.getElementById("warn");
+
 // 刪除支出紀錄
 async function deleteCostRecord(Id) {
   let url = `/api/cost_records/${Id}`;
@@ -92,13 +96,19 @@ async function deleteCostRecord(Id) {
   });
   let deleteSuccess = await response.json();
   if (deleteSuccess.ok) {
-    window.location.reload();
+    hidden.style.display = "block";
+    warnForm.style.display = "block";
+    warn.style.color = "#8ce600";
+    warn.textContent = "🅥 紀錄刪除成功";
+    setTimeout(function () {
+      warnForm.style.display = "none";
+      hidden.style.display = "none";
+      window.location.reload();
+    }, 1000);
   }
 }
 
 // 搜尋支出關鍵字
-const warnForm = document.getElementById("warnForm");
-const warn = document.getElementById("warn");
 const searchCategoryInput = document.getElementById("search-category");
 const searchCategoryButton = document.getElementById("btn-search");
 

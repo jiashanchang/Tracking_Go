@@ -84,6 +84,10 @@ function writeOffPage(page, data) {
   });
 }
 
+const hidden = document.getElementById("hidden");
+const warnForm = document.getElementById("warnForm");
+const warn = document.getElementById("warn");
+
 // 刪除沖帳紀錄
 async function deleteWriteOffRecord(Id) {
   let url = `/api/writeoff_records/${Id}`;
@@ -92,13 +96,19 @@ async function deleteWriteOffRecord(Id) {
   });
   let deleteSuccess = await response.json();
   if (deleteSuccess.ok) {
-    window.location.reload();
+    hidden.style.display = "block";
+    warnForm.style.display = "block";
+    warn.style.color = "#8ce600";
+    warn.textContent = "🅥 紀錄刪除成功";
+    setTimeout(function () {
+      warnForm.style.display = "none";
+      hidden.style.display = "none";
+      window.location.reload();
+    }, 1000);
   }
 }
 
 // 搜尋沖帳關鍵字
-const warnForm = document.getElementById("warnForm");
-const warn = document.getElementById("warn");
 const searchCategoryInput = document.getElementById("search-category");
 const searchCategoryButton = document.getElementById("btn-search");
 

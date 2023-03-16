@@ -164,7 +164,15 @@ async function deleteIncomeCategory(Id) {
   });
   let deleteSuccess = await response.json();
   if (deleteSuccess.ok) {
-    window.location.reload();
+    hidden.style.display = "block";
+    warnForm.style.display = "block";
+    warn.style.color = "#8ce600";
+    warn.textContent = "🅥 分類刪除成功";
+    setTimeout(function () {
+      warnForm.style.display = "none";
+      hidden.style.display = "none";
+      window.location.reload();
+    }, 1000);
   } else {
     warnForm.style.display = "block";
     warn.style.color = "red";

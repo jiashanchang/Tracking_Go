@@ -1,10 +1,14 @@
+.year {
+    padding-top: 20px;
+}
+
 .balance-sheet {
-    margin: 30px;
+    margin: 25px;
     font-weight: bold;
 }
 
 .income-statement {
-    margin: 30px;
+    margin: 25px;
     font-weight: bold;
 }
 

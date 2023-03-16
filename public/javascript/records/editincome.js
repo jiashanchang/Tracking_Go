@@ -88,7 +88,7 @@ async function editIncomeList() {
       hidden.style.display = "block";
       warnForm.style.display = "block";
       warn.style.color = "#8ce600";
-      warn.textContent = "🅥 已修改此筆紀錄";
+      warn.textContent = "🅥 已更新此筆紀錄";
       setTimeout(function () {
         warnForm.style.display = "none";
         hidden.style.display = "none";

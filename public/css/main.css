@@ -161,7 +161,7 @@ select {
     background-color: #F9F7F0;
     border: 1px #072A40 solid;
     border-radius: 5px;
-    margin-left: 10px;
+    margin-left: 25px;
 }
 
 input {
@@ -175,7 +175,7 @@ input[type] {
     text-align: center;
     border: 1px #072A40 solid;
     border-radius: 5px;
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
 .btn {
