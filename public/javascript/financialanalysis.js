@@ -64,15 +64,23 @@ for (let j = 2020; j < 2100; j++) {
 
 // 支出顏色
 const doughnutCostColor = [
+    "#400012",
+    "#550018",
+    "#5E001A",
     "#67001D",
     "#880027",
     "#A10C37",
+    "#B11D48",
     "#C02E59",
+    "#CA3965",
     "#D44470",
     "#E35E88",
+    "#EF91AF",
     "#F2789F",
+    "#F69EBB",
     "#F599B7",
     "#FABED2",
+    "#FAC9DA",
 ];
 
 // 收入顏色
@@ -342,20 +350,11 @@ async function monthlyNetIncome() {
     });
     let records = await response.json();
     detailList.innerHTML = "";
-    let costSum = 0;
-    for (let i = 0; i < records.data.costAmountList.length; i++) {
-        costSum += records.data.costAmountList[i].amount;
-    }
-
-    let incomeSum = 0;
-    for (let i = 0; i < records.data.incomeAmountList.length; i++) {
-        incomeSum += records.data.incomeAmountList[i].amount;
-    }
 
     const incomeDiv = document.createElement("div");
     incomeDiv.className = "eachDetail";
     const incomeName = document.createTextNode("總收入");
-    const monthTotalIncome = document.createTextNode("$" + incomeSum);
+    const monthTotalIncome = document.createTextNode("$" + records.data.totalIncome.toLocaleString());
     detailList.appendChild(incomeDiv);
     incomeDiv.appendChild(incomeName);
     incomeDiv.appendChild(monthTotalIncome);
@@ -363,17 +362,16 @@ async function monthlyNetIncome() {
     const costDiv = document.createElement("div");
     costDiv.className = "eachDetail";
     const costName = document.createTextNode("總支出");
-    const monthTotalCost = document.createTextNode("$" + costSum);
+    const monthTotalCost = document.createTextNode("$" + records.data.totalCost.toLocaleString());
     detailList.appendChild(costDiv);
     costDiv.appendChild(costName);
     costDiv.appendChild(monthTotalCost);
 
-    const netAmount = incomeSum - costSum;
     const formattedDate = netMonth.replace("-", "年");
-    net.textContent = formattedDate + "月結餘 $" + netAmount.toLocaleString();
+    net.textContent = formattedDate + "月結餘 $" + records.data.netAmount.toLocaleString();
 
     const costAndIncome = ["總支出", "總收入"];
-    const costAndIncomeAmount = [costSum, incomeSum];
+    const costAndIncomeAmount = [records.data.totalCost, records.data.totalIncome];
 
     getDoughnut(costAndIncome, costAndIncomeAmount, doughnutNetColor);
 }
@@ -389,37 +387,27 @@ async function yearlyNetIncome() {
     });
     let records = await response.json();
     detailList.innerHTML = "";
-    let costSum = 0;
-    for (let i = 0; i < records.data.costAmountList.length; i++) {
-        costSum += records.data.costAmountList[i].amount;
-    }
-
-    let incomeSum = 0;
-    for (let i = 0; i < records.data.incomeAmountList.length; i++) {
-        incomeSum += records.data.incomeAmountList[i].amount;
-    }
 
     const incomeDiv = document.createElement("div");
     incomeDiv.className = "eachDetail";
     const incomeName = document.createTextNode("總收入");
-    const monthTotalIncome = document.createTextNode("$" + incomeSum);
+    const yearTotalIncome = document.createTextNode("$" + records.data.totalIncome.toLocaleString());
     detailList.appendChild(incomeDiv);
     incomeDiv.appendChild(incomeName);
-    incomeDiv.appendChild(monthTotalIncome);
+    incomeDiv.appendChild(yearTotalIncome);
 
     const costDiv = document.createElement("div");
     costDiv.className = "eachDetail";
     const costName = document.createTextNode("總支出");
-    const monthTotalCost = document.createTextNode("$" + costSum);
+    const yearTotalCost = document.createTextNode("$" + records.data.totalCost.toLocaleString());
     detailList.appendChild(costDiv);
     costDiv.appendChild(costName);
-    costDiv.appendChild(monthTotalCost);
+    costDiv.appendChild(yearTotalCost);
 
-    const netAmount = incomeSum - costSum;
-    net.textContent = selectNetYear + "結餘 $" + netAmount.toLocaleString();
+    net.textContent = selectNetYear + "結餘 $" + records.data.netAmount.toLocaleString();
 
     const costAndIncome = ["總支出", "總收入"];
-    const costAndIncomeAmount = [costSum, incomeSum];
+    const costAndIncomeAmount = [records.data.totalCost, records.data.totalIncome];
 
     getDoughnut(costAndIncome, costAndIncomeAmount, doughnutNetColor);
 }

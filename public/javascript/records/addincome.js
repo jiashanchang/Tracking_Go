@@ -98,7 +98,7 @@ async function addIncomeList() {
       warnForm.style.display = "none";
       hidden.style.display = "none";
       window.location.href = "/property/income-list";
-    }, 1500);
+    }, 1000);
   } else {
     warnForm.style.display = "block";
     warn.style.color = "red";

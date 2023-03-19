@@ -88,19 +88,19 @@ async function editCostList() {
       hidden.style.display = "block";
       warnForm.style.display = "block";
       warn.style.color = "#8ce600";
-      warn.textContent = "🅥 已修改此筆紀錄";
+      warn.textContent = "🅥 已更新此筆紀錄";
       setTimeout(function () {
         warnForm.style.display = "none";
         hidden.style.display = "none";
         window.location.href = "/property/cost-list";
-      }, 1500);
+      }, 1000);
     } else {
       warnForm.style.display = "block";
       warn.style.color = "red";
       warn.textContent = "⚠ " + `${editSuccess.message}`;
       setTimeout(function () {
         warnForm.style.display = "none";
-      }, 1500);
+      }, 1000);
     }
   } else {
     warnForm.style.display = "block";
@@ -108,7 +108,7 @@ async function editCostList() {
     warn.textContent = "⚠ 請輸入金額";
     setTimeout(function () {
       warnForm.style.display = "none";
-    }, 1500);
+    }, 1000);
   }
 }
 

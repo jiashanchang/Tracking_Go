@@ -32,15 +32,21 @@ body {
 .project-name {
   font-size: 30px;
   font-weight: bold;
-  float: left;
-  line-height: 54px;
   margin-left: 10px;
   color: #072A40;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  width: 200px;
 }
   
 .project-name:hover {
   transform: scale(1.1);
+}
+
+.logo {
+  width: 55px;
+  margin-right: 3px;
 }
 
 .select {
@@ -73,6 +79,34 @@ body {
 
 .selection:hover {
   color: #647580;
+}
+
+#warnForm {
+  position: fixed;
+  transform: translate(-170px,0px);
+  top: 80px;
+  left: 50%;
+  width: 340px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 60px #AAAAAA;
+  border-radius: 6px;
+  z-index: 2;
+  display: none;
+}
+
+#cover {
+  background: linear-gradient(270deg, #072A40 0%, #178CA4 100%);
+  background-size: 340px 10px;
+  background-repeat: no-repeat;
+  border-radius: 6px;
+}
+
+#warn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  font-size: 16px;
 }
 
 .middle {

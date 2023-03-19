@@ -30,8 +30,11 @@ const loginBottomMessage = document.querySelector(".loginBottomMessage");
 let emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
 let passwordRule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
-let checkEmailInputValue;
-let checkPasswordInputValue;
+let checkEmailInputValue = true;
+let checkPasswordInputValue = true;
+
+document.getElementById("loginEmail").value = "test@gmail.com";
+document.getElementById("loginPassword").value = "test12345";
 
 loginEmail.addEventListener("focus", () => {
   loginEmailMessage.style.display = "none";
@@ -79,6 +82,8 @@ loginPassword.addEventListener("input", () => {
 });
 
 // 登入流程
+const warnForm = document.getElementById("warnForm");
+const warn = document.getElementById("warn");
 const login = document.getElementById("login");
 
 async function memberLogin() {
@@ -103,7 +108,13 @@ async function memberLogin() {
   })
   let memberIsLogin = await fetchAPI.json();
   if (memberIsLogin.ok) {
-    location.reload();
+    warnForm.style.display = "block";
+    warn.style.color = "#8ce600";
+    warn.textContent = "🅥 您已成功登入";
+    setTimeout(function () {
+      warnForm.style.display = "none";
+      location.reload();
+    }, 1500);
   } else {
     loginBottomMessage.style.display = "flex";
     loginBottomMessage.style.color = "red";

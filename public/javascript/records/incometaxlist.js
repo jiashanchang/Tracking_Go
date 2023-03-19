@@ -84,6 +84,10 @@ function taxPage(page, data) {
   });
 }
 
+const hidden = document.getElementById("hidden");
+const warnForm = document.getElementById("warnForm");
+const warn = document.getElementById("warn");
+
 // 刪除所得稅紀錄
 async function deleteTaxRecord(Id) {
   let url = `/api/tax_records/${Id}`;
@@ -92,6 +96,83 @@ async function deleteTaxRecord(Id) {
   });
   let deleteSuccess = await response.json();
   if (deleteSuccess.ok) {
-    window.location.reload();
+    hidden.style.display = "block";
+    warnForm.style.display = "block";
+    warn.style.color = "#8ce600";
+    warn.textContent = "🅥 紀錄刪除成功";
+    setTimeout(function () {
+      warnForm.style.display = "none";
+      hidden.style.display = "none";
+      window.location.reload();
+    }, 1000);
   }
 }
+
+// 搜尋所得稅關鍵字
+const searchCategoryInput = document.getElementById("search-category");
+const searchCategoryButton = document.getElementById("btn-search");
+
+searchCategoryButton.addEventListener("click", async () => {
+  const category = searchCategoryInput.value;
+  let response = await fetch(`/api/tax_records?search=${category}`, {
+    method: "GET",
+  });
+  let keyword = await response.json();
+  if (!keyword || !keyword.data || keyword.data.length === 0) {
+    warnForm.style.display = "block";
+    warn.style.color = "red";
+    warn.textContent = "⚠ 查無此關鍵字";
+    setTimeout(function () {
+      warnForm.style.display = "none";
+    }, 1000);
+    return;
+  }
+  keyword = keyword.data;
+  const pageNumber = document.querySelector(".incomeTaxPageNumber");
+  const buttonNumber = Math.ceil(keyword.length / 52);
+  let str = "";
+  for (let j = 0; j < buttonNumber; j++) {
+    str += `<span>${j + 1}</span>`;
+  }
+  pageNumber.innerHTML = str;
+  const allTaxButton = document.querySelectorAll(".incomeTaxPageNumber span");
+
+  for (let j = 0; j < allTaxButton.length; j++) {
+    allTaxButton[j].addEventListener(
+      "click",
+      taxPage.bind(this, j + 1, keyword)
+    );
+  }
+  taxPage(1, keyword);
+});
+
+// 所得稅分類
+async function searchCategories() {
+  const categories = ["所得稅費用", "所得稅利益"];
+  const categoriesListElement = document.getElementById("category-list");
+  categories.forEach((category) => {
+    const categoriesItem = document.createElement("li");
+    const categoriesTitle = document.createTextNode(category);
+    categoriesItem.setAttribute("class", "categories");
+    categoriesItem.appendChild(categoriesTitle);
+    categoriesItem.addEventListener("click", chooseCategories);
+    categoriesListElement.appendChild(categoriesItem);
+  });
+}
+
+searchCategories()
+
+// 選擇所得稅分類
+function chooseCategories() {
+  const categoriesValue = document.getElementById("search-category");
+  categoriesValue.value = this.textContent;
+}
+
+document.onclick = function (event) {
+  const categoriesList = document.getElementById("category-list");
+  if (event.target.id != "search-category") {
+    categoriesList.style.display = "none";
+  } else {
+    categoriesList.style.display = "flex";
+  }
+};

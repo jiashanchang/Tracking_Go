@@ -1,0 +1,45 @@
+<div class="noCategory">
+  <img src="/images/icon_item.jpg" class="icon-record" />
+  <div class="record-text">點擊 + 新增一筆</div>
+</div>
+
+<div class="addIncomeCategory categoryForm">
+  <div class="cover">
+    <div class="add">
+      新增收入分類：<input
+        type="text"
+        id="inputNewIncomeCategory"
+        placeholder="分類名稱"
+      />
+    </div>
+    <div class="addIncomeMessage"></div>
+    <div class="addButton">
+      <button class="btn red darken" id="addIncomeCategoryBtn">新增</button>
+      <button class="btn" id="cancelAddIncomeCategory">取消</button>
+    </div>
+  </div>
+</div>
+
+<div class="editIncomeCategory categoryForm">
+  <div class="cover">
+    <div class="edit">
+      更新收入分類：<input
+        type="text"
+        id="inputIncomeCategory"
+        placeholder="新分類名稱"
+      />
+    </div>
+    <div class="editIncomeMessage"></div>
+    <div class="editButton">
+      <button class="btn red darken" id="editIncomeCategoryBtn">更新</button>
+      <button class="btn" id="cancelEditIncomeCategory">取消</button>
+    </div>
+  </div>
+</div>
+
+<div class="income-field">
+  <div class="income-category-list"></div>
+  <img src="/images/icon_plus.jpg" class="img-plus" id="addIncomeCategoryImg" />
+</div>
+
+<script type="text/javascript" src="/javascript/categories/incomecategory.js"></script>

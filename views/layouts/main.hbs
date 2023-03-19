@@ -4,29 +4,31 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <link rel="icon" href="/images/logo.jpg">
     <link rel="stylesheet" href="/css/home.css" />
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/property.css" />
+    <link rel="stylesheet" href="/css/categorymanagement.css" />
     <link rel="stylesheet" href="/css/financialanalysis.css" />
     <link rel="stylesheet" href="/css/financialstatement.css" />
     <link rel="stylesheet" href="/css/error.css" />
 
-    <title>記帳趣</title>
+    <title>記帳趣 Tracking Go</title>
   </head>
   <body>
     <div class="planning">
       <div id="hidden"></div>
       <div class="top">
         <div class="topTitle">
-          <a href="/"><div class="project-name">
-              <i class="fas fa-book-reader"></i>記帳趣
-            </div></a>
+          <a href="/" class="project-name">
+             <img src="/images/logo.jpg" class="logo" />記帳趣
+            </a>
           <label for="burger">
             <img src="/images/icon_burger.jpg" class="sidenav-trigger" />
           </label>
           <div class="menu">
             <span class="topic-choice selection" id="account-book">記帳本</span>
+            <span id="category-management" class="topic-choice selection">分類管理</span>
             <a href="/financialanalysis"><span class="topic-choice selection">財務分析</span></a>
             <a href="/financialstatement"><span class="topic-choice selection">財務報表</span></a>
             <a id="signout"><span class="topic-choice selection">登出</span></a>
@@ -36,9 +38,14 @@
               <a href="/property/writeoff-list"><div class="records-list">沖帳清單</div></a>
               <a href="/property/incometax-list"><div class="records-list">所得稅清單</div></a>
             </div>
+            <div class="category-menu">
+              <a href="/categorymanagement/cost-category"><div class="records-list">支出分類</div></a>
+              <a href="/categorymanagement/income-category"><div class="records-list">收入分類</div></a>
+            </div>
           </div>
           <div class="open-menu">
-            <span class="topic-choice selection" id="burger-account-book">記帳本</span>
+            <a><span class="topic-choice selection" id="burger-account-book">記帳本</span></a>
+            <a><span id="burger-category-management" class="topic-choice selection">分類管理</span></a>
             <a href="/financialanalysis"><span class="topic-choice selection">財務分析</span></a>
             <a href="/financialstatement"><span class="topic-choice selection">財務報表</span></a>
             <a id="logout"><span class="topic-choice selection">登出</span></a>
@@ -46,12 +53,15 @@
         </div>
       </div>
       <div class="burger-list-menu">
-        <a href="/property/cost-list"><div class="records-list">支出清單</div></a>
-        <a href="/property/income-list"><div class="records-list">收入清單</div></a>
-        <a href="/property/writeoff-list"><div class="records-list">沖帳清單</div></a>
-        <a href="/property/incometax-list"><div class="records-list">所得稅清單</div></a>
+        <a href="/property/cost-list"><div class="record-lists">支出清單</div></a>
+        <a href="/property/income-list"><div class="record-lists">收入清單</div></a>
+        <a href="/property/writeoff-list"><div class="record-lists">沖帳清單</div></a>
+        <a href="/property/incometax-list"><div class="record-lists">所得稅清單</div></a>
       </div>
-
+      <div class="burger-category-menu">
+        <a href="/categorymanagement/cost-category"><div class="record-lists">支出分類</div></a>
+        <a href="/categorymanagement/income-category"><div class="record-lists">收入分類</div></a>
+      </div>
       <div id="warnForm">
         <div id="cover">
           <div id="warn"></div>

@@ -1,13 +1,18 @@
 <section class="main">
   <div class="main-top">
     <div class="createRecord">
+      <div class="keyword-search-field">
+        <input type="text" placeholder="請輸入收入分類或備註內容" id="search-category">
+        <button type="submit" class="btn" id="btn-search">查詢</button>
+        <div id="category-list"></div>
+      </div>
       <div class="noRecord">
         <img src="/images/icon_record.jpg" class="icon-record" />
         <div class="record-text">點擊 + 新增一筆</div>
       </div>
 
       <div class="income-list-field">
-        <h3>收入清單</h3>
+        <h2>收入清單</h2>
         <div class="incomeRecordList all-records"></div>
         <div class="incomePageNumber"></div>
         <a href="/property/records/addincome"><img src="/images/icon_plus.jpg" class="icon-plus"/></a>

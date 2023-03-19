@@ -1,0 +1,45 @@
+<div class="noCategory">
+  <img src="/images/icon_item.jpg" class="icon-record" />
+  <div class="record-text">點擊 + 新增一筆</div>
+</div>
+
+<div class="addCostCategory categoryForm">
+  <div class="cover">
+    <div class="add">
+      新增支出分類：<input
+        type="text"
+        id="inputNewCostCategory"
+        placeholder="分類名稱"
+      />
+    </div>
+    <div class="addCostMessage"></div>
+    <div class="addButton">
+      <button class="btn red darken" id="addCostCategoryBtn">新增</button>
+      <button class="btn" id="cancelAddCostCategory">取消</button>
+    </div>
+  </div>
+</div>
+
+<div class="editCostCategory categoryForm">
+  <div class="cover">
+    <div class="edit">
+      更新支出分類：<input
+        type="text"
+        id="inputCostCategory"
+        placeholder="新分類名稱"
+      />
+    </div>
+    <div class="editCostMessage"></div>
+    <div class="editButton">
+      <button class="btn red darken" id="editCostCategoryBtn">更新</button>
+      <button class="btn" id="cancelEditCostCategory">取消</button>
+    </div>
+  </div>
+</div>
+
+<div class="cost-field">
+  <div class="cost-category-list"></div>
+  <img src="/images/icon_plus.jpg" class="img-plus" id="addCostCategoryImg" />
+</div>
+
+<script type="text/javascript" src="/javascript/categories/costcategory.js"></script>

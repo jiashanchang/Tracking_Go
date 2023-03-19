@@ -22,7 +22,7 @@ isMember();
 const signout = document.querySelector(".signout");
 signout.addEventListener("click", () => {
   fetch("/api/member/signout", {
-    method: "GET",
+    method: "DELETE",
   })
     .then(function (response) {
       return response.json();

@@ -5,7 +5,6 @@ const costCategorySchema = new mongoose.Schema({
     category: {
         type: String,
         trim: true,
-        unique: true,
         required: true,
     },
     recordId: [
@@ -14,6 +13,10 @@ const costCategorySchema = new mongoose.Schema({
             ref: "costrecords",
         },
     ],
+    memberId: {
+        type: Schema.Types.ObjectId,
+        ref: "members",
+    },
 }, { versionKey: false });
 
 module.exports = mongoose.model("costcategories", costCategorySchema);

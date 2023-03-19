@@ -4,19 +4,49 @@
     text-align: center;
 }
 
-.record-lists {
-    margin: 20px;
-    display: flex;
-    border: 1px solid;
-    border-radius: 5px;
+.keyword-search-field {
+    text-align: left;
 }
 
-.all-details {
-    width: 25%;
-    border-radius: 5px;
-    margin: auto;
-    text-align: center;
+#search-category {
+    width: 200px;
+}
+
+#category-list {
+    position: absolute;
+    width: 205.33px;
+    background-color: #ffffff;
+    box-shadow: 12px 12px 7px rgba(0, 0, 0, 0.5);
+    border-radius: 5px 5px 5px 5px;
+    margin-top: 1px;
+    margin-left: 10px;
+    flex-wrap: wrap;
+    display: none;
+}
+
+#category-list li {
+    color: #444;
+    font-weight: bold;
+    list-style: none;
+    float: left;
+    margin: 5px;
+}
+  
+#category-list li:hover {
     cursor: pointer;
+    box-shadow: 0 0 5px 5px #f0f0f0;
+    background-color: #f0f0f0;
+}
+
+.icon-record {
+    width: 100px;
+    padding: 20px;
+}
+
+.record-text {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 10px;
 }
 
 .all-records {
@@ -26,17 +56,6 @@
     gap: 30px;
     margin: 50px auto;
     justify-content: center;
-}
-
-.icon-record {
-    width: 100px;
-    padding: 10px;
-}
-
-.record-text {
-    font-size: 20px;
-    font-weight: bold;
-    padding: 10px;
 }
 
 .record {
@@ -102,13 +121,13 @@
         grid-template-columns: repeat(3, 270px);
     }
 }
-  
+
 @media (max-width: 900px) {
     .all-records {
         grid-template-columns: repeat(2, 270px);
     }
 }
-  
+
 @media (max-width: 600px) {
     .all-records {
         grid-template-columns: repeat(1, 320px);

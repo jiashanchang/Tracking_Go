@@ -15,7 +15,7 @@ checkMember();
 const signout = document.getElementById("signout");
 signout.addEventListener("click", () => {
   fetch("/api/member/signout", {
-    method: "GET",
+    method: "DELETE",
   })
     .then(function (response) {
       return response.json();
@@ -30,7 +30,7 @@ signout.addEventListener("click", () => {
 const logout = document.getElementById("logout");
 logout.addEventListener("click", () => {
   fetch("/api/member/signout", {
-    method: "GET",
+    method: "DELETE",
   })
     .then(function (response) {
       return response.json();
@@ -67,8 +67,8 @@ listMenu.addEventListener("mouseover", () => {
 });
 
 window.addEventListener("mouseover",() => {
-    listMenu.style.display = "none";
-  }, true);
+  listMenu.style.display = "none";
+}, true);
 
 const burgerAccountBook = document.getElementById("burger-account-book");
 const burgerListMenu = document.querySelector(".burger-list-menu");
@@ -85,3 +85,34 @@ burgerAccountBook.addEventListener("click", function () {
 window.addEventListener("resize", hideBurgerListMenu);
 
 hideBurgerListMenu();
+
+// 分類
+const categoryMenu = document.querySelector(".category-menu");
+const categoryManagement = document.getElementById("category-management");
+categoryManagement.addEventListener("mouseover", () => {
+  categoryMenu.style.display = "block";
+});
+
+categoryMenu.addEventListener("mouseover", () => {
+  categoryMenu.style.display = "block";
+});
+
+window.addEventListener("mouseover",() => {
+  categoryMenu.style.display = "none";
+}, true);
+
+const burgerCategoryManagement = document.getElementById("burger-category-management");
+const burgerCategoryMenu = document.querySelector(".burger-category-menu");
+function hideBurgerCategoryMenu() {
+  if (window.innerWidth > 800) {
+    burgerCategoryMenu.classList.remove("show");
+  }
+}
+
+burgerCategoryManagement.addEventListener("click", function () {
+  burgerCategoryMenu.classList.toggle("show");
+});
+
+window.addEventListener("resize", hideBurgerCategoryMenu);
+
+hideBurgerCategoryMenu();
