@@ -1,4 +1,4 @@
-# 記帳趣 Tracking_Go
+# 記帳趣 Tracking Go
 
 <p align="center">
   <img src="/public/images/logo.jpg" width="150px">

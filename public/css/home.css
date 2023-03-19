@@ -36,9 +36,8 @@ body {
   color: #072A40;
   text-decoration: none;
   display: flex;
-  justify-content: center;
   align-items: center;
-  width: 150px;
+  width: 200px;
 }
   
 .project-name:hover {
